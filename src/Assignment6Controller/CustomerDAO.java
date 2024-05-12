@@ -10,6 +10,7 @@ import java.sql.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
 
@@ -55,7 +56,20 @@ public class CustomerDAO implements DAOInterface<BankCustomer> {
         return res;
     }
 
-    // Method to retrieve a user from the database by ID
+    //PERSONAL*****88********
+//    public ArrayList getCustListByID(ArrayList custID) throws SQLException {
+//
+//
+//        result = pStatement.executeQuery();
+//
+//        while(result.next()){
+//
+//        }
+//
+//    }
+
+
+        // Method to retrieve a user from the database by ID
     @Override
     public BankCustomer get(int anID) throws SQLException {
 

@@ -4,11 +4,19 @@
  */
 package Assignment6View;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author karunmehta
  */
 public class CustomerList extends javax.swing.JFrame {
+
+    public static ArrayList custListt = new ArrayList();
+
+    public static void setCustListt(ArrayList t){
+        custListt = t;
+    }
 
     /**
      * Creates new form CustomerList
@@ -24,7 +32,7 @@ public class CustomerList extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    public void initComponents() {
 
         details = new javax.swing.JButton();
         cancel = new javax.swing.JButton();
@@ -47,7 +55,19 @@ public class CustomerList extends javax.swing.JFrame {
 
         jLabel1.setText("Customer List:");
 
-        custList.setModel(new javax.swing.AbstractListModel<String>() {
+
+        //trying to set the cl array list to the variable custList in the gui
+        //to test if i can use an arry list to display the variables
+        //before i create a method that returns the arrya list of bankcustomer objects
+
+        //goal is to have abnkdao create an array of bank cusotmer objects so that
+        //i can pass it to the custList gui variable here
+
+        //rn i am trhing to test if i can do that rn
+
+
+
+        custList.setModel(new javax.swing.AbstractListModel<>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }

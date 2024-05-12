@@ -159,15 +159,28 @@ public class CustomerSearch extends javax.swing.JFrame {
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
         // TODO add your handling code here:
         String cityToSearch = cityAddy.getText();
-        //^this will just keep adding to the string if the user keeps pressing it
         CustomerAddressDAO getter = new CustomerAddressDAO();
         ArrayList cl = new ArrayList();
+        System.out.println(cityToSearch);
         try {
            cl = getter.getAddyID(cityToSearch);
         }catch (java.sql.SQLException t){
             System.out.println("MySQL DB error: " + t);
         }
-        System.out.print(cl);
+
+        System.out.println(cl);
+
+        //opens customer list GUI
+        if(cl.size() != 0){
+            //open cusomter list
+            new CustomerList().setVisible(true);
+            CustomerList.setCustListt(cl);
+            //now we need to pass arraylist int cusotmer list
+        }else{
+            //display GUI error that there was no customers found
+            //set a red text under text box that says "no customer found" on a timer
+            System.out.println("No customers");
+        }
 
 
 

@@ -86,7 +86,7 @@ public class CustomerAddressDAO implements DAOInterface<CustomerAddress> {
         while (result.next()) {
             custID.add(result.getInt("cusid"));
         }
-result.close();
+        result.close();
         return custID;
     }
 
