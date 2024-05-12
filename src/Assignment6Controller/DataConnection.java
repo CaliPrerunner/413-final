@@ -19,7 +19,7 @@ public class DataConnection {
     // JDBC URL, username, and password of MySQL server
     private static final String URL = "jdbc:mysql://localhost:3306/CS413";
     private static final String USERNAME = "root";
-    private static final String PASSWORD = "219Med@78";
+    private static final String PASSWORD = "password";
 
     // JDBC variables for opening and managing connection
     private static Connection connection;

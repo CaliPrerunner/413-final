@@ -152,6 +152,12 @@ public class CustomerSearch extends javax.swing.JFrame {
 
     private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
         // TODO add your handling code here:
+        String cityToSearch = cityAddy.getText();
+        //^this will just keep adding to the string if the user keeps pressing it
+        System.out.print(cityToSearch);
+
+
+
     }//GEN-LAST:event_searchActionPerformed
 
     /**

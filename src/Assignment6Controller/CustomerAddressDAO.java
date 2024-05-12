@@ -70,6 +70,22 @@ public class CustomerAddressDAO implements DAOInterface<CustomerAddress> {
 
         return addr;
     }
+    // ADDED PERSONAL, TO GET  the customer ID's from when searched for a city
+    @Override
+    public CustomerAddress getAddyID(String cityAddy) throws SQLException {
+
+        pStatement = connection.prepareStatement(AddressDataConnection.getCitySearch());
+        pStatement.setString(1, cityAddy);
+        // idk if this will work ^ orginal: pStatement.setInt(1,cityAddy);
+        result = pStatement.executeQuery();
+
+        CustomerAddress addr = null;
+        if (result.next()) {
+            addr = new CustomerAddress( result.getInt("custid"),result.getInt("streetnum"), result.getString("streetname"), result.getString("city"), result.getString("state"), result.getInt("zip)"));
+        }
+
+        return addr;
+    }
 
     // Method to update a customeraddress in the database
     @Override
