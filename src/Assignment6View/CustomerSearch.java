@@ -4,6 +4,12 @@
  */
 package Assignment6View;
 
+import Assignment6Controller.*;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 /**
  *
  * @author karunmehta
@@ -154,7 +160,14 @@ public class CustomerSearch extends javax.swing.JFrame {
         // TODO add your handling code here:
         String cityToSearch = cityAddy.getText();
         //^this will just keep adding to the string if the user keeps pressing it
-        System.out.print(cityToSearch);
+        CustomerAddressDAO getter = new CustomerAddressDAO();
+        ArrayList cl = new ArrayList();
+        try {
+           cl = getter.getAddyID(cityToSearch);
+        }catch (java.sql.SQLException t){
+            System.out.println("MySQL DB error: " + t);
+        }
+        System.out.print(cl);
 
 
 

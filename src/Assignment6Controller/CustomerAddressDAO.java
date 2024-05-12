@@ -7,6 +7,7 @@ package Assignment6Controller;
 import Assignment6Model.*;
 import Assignment6Model.BankCustomer;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
 import java.util.HashMap;
@@ -23,9 +24,10 @@ public class CustomerAddressDAO implements DAOInterface<CustomerAddress> {
     PreparedStatement pStatement;
     ResultSet result;
     
-    CustomerAddressDAO() {
+    public CustomerAddressDAO() {
 
-            connection = DataConnection.getDBConnection();      
+            connection = DataConnection.getDBConnection();
+            int x =0;
 
     }
        
@@ -71,20 +73,21 @@ public class CustomerAddressDAO implements DAOInterface<CustomerAddress> {
         return addr;
     }
     // ADDED PERSONAL, TO GET  the customer ID's from when searched for a city
-    @Override
-    public CustomerAddress getAddyID(String cityAddy) throws SQLException {
+    //******************************************************
+
+    public ArrayList getAddyID(String cityAddy) throws SQLException {
 
         pStatement = connection.prepareStatement(AddressDataConnection.getCitySearch());
         pStatement.setString(1, cityAddy);
-        // idk if this will work ^ orginal: pStatement.setInt(1,cityAddy);
         result = pStatement.executeQuery();
-
         CustomerAddress addr = null;
-        if (result.next()) {
-            addr = new CustomerAddress( result.getInt("custid"),result.getInt("streetnum"), result.getString("streetname"), result.getString("city"), result.getString("state"), result.getInt("zip)"));
+        ArrayList custID = new ArrayList();
+        //will loop through the results and get the custID values form searching via the city
+        while (result.next()) {
+            custID.add(result.getInt("cusid"));
         }
-
-        return addr;
+result.close();
+        return custID;
     }
 
     // Method to update a customeraddress in the database

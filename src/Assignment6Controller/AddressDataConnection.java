@@ -25,7 +25,7 @@ public class AddressDataConnection extends DataConnection {
     private static final String DELETE_SQL = "DELETE FROM Customer WHERE id = ?"; 
     private static final String SELECT_ADMIN = "SELECT * FROM admin WHERE userid = ?";
     // will search for the city of each customer with a givven city, but must have "" or '' around it like "Fremont"
-    private static final String CITY_SEARCH = "Select * from customeraddress where city =";
+    private static final String CITY_SEARCH = "Select * from customeraddress where city = ?";
  
     public AddressDataConnection()  { }
 
