@@ -65,9 +65,9 @@ public class AccountDAO implements DAOInterface<BankAccount>{
         BankAccount updatedAct = null;
         while (result.next()) {
             if(result.getString("acct_type").equalsIgnoreCase(checking))
-            {updatedAct = new CheckingAccount( result.getInt("id"));}
+            {updatedAct = new CheckingAccount( result.getInt("acct_num"));}
             else {
-                updatedAct = new SavingsAccount(result.getInt("id"));
+                updatedAct = new SavingsAccount(result.getInt("acct_num"));
             }
             updatedAct.setBalance(result.getFloat("balance"));
             LocalDate ld = createLocalDate(result.getString("create_date"));
