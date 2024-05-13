@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -54,20 +55,6 @@ public class CustomerDAO implements DAOInterface<BankCustomer> {
         
         return res;
     }
-
-    //will search for customers via custID and then put them in a list
-//    public ArrayList getCustListByID(ArrayList custID) throws SQLException {
-//
-//        result = pStatement.executeQuery();
-//        for(int x=0; custID.size() > x; x++){
-//
-//        }
-//
-//        while(result.next()){
-//
-//        }
-//
-//    }
 
 
         // Method to retrieve a user from the database by ID
@@ -147,6 +134,28 @@ public class CustomerDAO implements DAOInterface<BankCustomer> {
         }
         
         return hm;
+    }
+
+
+
+    public ArrayList getALlCustomers() throws SQLException {
+
+        ArrayList IDList = new ArrayList();
+        ArrayList custList = new ArrayList();
+        //getting all the ID numbers
+        pStatement = connection.prepareStatement("SELECT id FROM CS413.bankcustomer;");
+        result = pStatement.executeQuery();
+        while(result.next()){
+            IDList.add(result.getInt("id"));
+        }
+        CustomerDAO d = new CustomerDAO();
+        for(int x=0; IDList.size()>x;x++){
+            custList.add(d.get((int) IDList.get(x)));
+        }
+
+
+
+        return custList;
     }
     
 }

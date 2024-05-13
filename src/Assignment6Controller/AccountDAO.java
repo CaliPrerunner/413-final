@@ -69,12 +69,14 @@ public class AccountDAO implements DAOInterface<BankAccount>{
             else {
                 updatedAct = new SavingsAccount(result.getInt("acct_num"));
             }
+            DateTimeFormatter format = DateTimeFormatter.ofPattern("d-M-yy");
+
             updatedAct.setBalance(result.getFloat("balance"));
-            LocalDate ld = createLocalDate(result.getString("create_date"));
+            LocalDate ld = LocalDate.parse(result.getString("create_date"), format);
             updatedAct.setCreateDate(ld);
             updatedAct.setAccountNum(result.getInt("acct_num"));
             updatedAct.setCustID(result.getInt("cust_id"));
-            ld = createLocalDate(result.getString("last_update_date"));
+            ld = LocalDate.parse(result.getString("last_update_date"), format);
             updatedAct.setLastUpDate(ld);
             updatedAct.setOdLimit(result.getInt("od_limit"));
             updatedAct.setIntRate(result.getFloat("int_rate"));

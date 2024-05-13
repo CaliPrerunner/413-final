@@ -98,16 +98,16 @@ public class AccountTransactionDAO implements DAOInterface<BankAccountTransactio
 
     public ArrayList getTransList(int accID) throws SQLException {
 
-        pStatement = connection.prepareStatement(AddressDataConnection.getSelect());
+        pStatement = connection.prepareStatement(TransactionDataConnection.getSelect());
         pStatement.setInt(1, accID);
         result = pStatement.executeQuery();
         ArrayList accList = new ArrayList();
         //will loop through the results and get the custID values form searching via the city
         while (result.next()) {
-            BankAccountTransaction addt = null;
-            addt.setAmount(result.getInt("amount"));
+            BankAccountTransaction addt = new BankAccountTransaction();
+            addt.setAmount(result.getDouble("amount"));
             addt.setDescription(result.getString("summary"));
-            addt.setID(result.getInt("acc_id"));
+            addt.setID(result.getInt("acct_id"));
             addt.setType(result.getString("tran_type"));
             addt.setCreateDate(result.getTimestamp("create_date"));
             accList.add(addt);

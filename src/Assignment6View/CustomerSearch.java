@@ -161,21 +161,25 @@ public class CustomerSearch extends javax.swing.JFrame {
         // TODO add your handling code here:
         String cityToSearch = cityAddy.getText();
         CustomerAddressDAO getter = new CustomerAddressDAO();
-
+        CustomerDAO c = new CustomerDAO();
+        //this array holds the custID of the list of customers from the
+        //given city from the sesarch
         ArrayList cl = new ArrayList();
-        System.out.println(cityToSearch);
+        ArrayList Customers = new ArrayList();
 
         try {
            cl = getter.getAddyID(cityToSearch);
+           for(int x=0; cl.size()>x;x++){
+               Customers.add(c.get((int) cl.get(x)));
+           }
         }catch (java.sql.SQLException t){
             System.out.println("MySQL DB error: " + t);
         }
-        System.out.println(cl);
 
         //opens customer list GUI
         if(cl.size() != 0){
             //open cusomter list
-            CustomerList.setCustListt(cl);
+            CustomerList.setCustListt(Customers);
             new CustomerList().setVisible(true);
             //now we need to pass arraylist int cusotmer list
         }else{

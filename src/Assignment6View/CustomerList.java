@@ -4,6 +4,10 @@
  */
 package Assignment6View;
 
+import Assignment6Model.BankCustomer;
+
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.util.ArrayList;
 
 /**
@@ -68,6 +72,19 @@ public class CustomerList extends javax.swing.JFrame {
             public int getSize() { return t.size(); }
             public String getElementAt(int i) { return t.get(i).toString(); }
         });
+
+        //when i press on the obj in the list it does this:
+        custList.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if(!e.getValueIsAdjusting()){
+                    int selectedCustomerIndex = custList.getSelectedIndex();
+                    System.out.println("selected acc: " +custListt.get(selectedCustomerIndex).toString() );
+
+                }
+            }
+        });
+
         jScrollPane1.setViewportView(custList);
 
         jLabel5.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N

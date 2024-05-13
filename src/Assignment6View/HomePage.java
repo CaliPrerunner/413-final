@@ -4,9 +4,13 @@
  */
 package Assignment6View;
 
+import Assignment6Controller.CustomerDAO;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+import java.sql.*;
 
 /**
  *
@@ -14,7 +18,7 @@ import java.awt.event.*;
  */
 public class HomePage extends JFrame implements ActionListener {
     
-    JButton jbSearch, jbAdd, jbRemove, jbUpdate;
+    JButton jbSearch, jbAdd, jbRemove, jbUpdate, showAllCust;
     
     HomePage() {
     
@@ -37,6 +41,25 @@ public class HomePage extends JFrame implements ActionListener {
         jbSearch.setBounds(100, 200, 200,40);
         jbSearch.addActionListener(this);
         theLabel.add(jbSearch);
+
+        //opens the CutsomerList GUI and displays all customers
+        showAllCust = new JButton("Show All Customers");
+        showAllCust.setBounds(100, 300, 200,40);
+        showAllCust.addActionListener( new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                CustomerDAO c = new CustomerDAO();
+                ArrayList Customers = new ArrayList();
+                try{
+                    Customers = c.getALlCustomers();
+                }catch(java.sql.SQLException t){
+                    System.out.println("MySQL DB error: " + t);
+                }
+                CustomerList.setCustListt(Customers);
+                new CustomerList().setVisible(true);
+            }
+        }
+       );
+        theLabel.add(showAllCust);
         
         jbAdd = new JButton("Add New Customer");
         jbAdd.setBounds(100, 250, 200,40);
@@ -48,16 +71,17 @@ public class HomePage extends JFrame implements ActionListener {
         setVisible(true);
     
     }
+
     
     public void actionPerformed(ActionEvent ae) {
-        
-        if((ae.getSource()) == jbAdd) { 
+
+        if((ae.getSource()) == jbAdd) {
                 new CustomerFrame();
         } else if((ae.getSource()) == jbSearch) {
             new CustomerSearch();
             this.setVisible(true);
         }
-        
+
     }
     
     //This main method is not needed, unless you want to run this class by itself from your IDE to validate its look'n feel
