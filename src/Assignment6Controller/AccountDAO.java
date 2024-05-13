@@ -4,7 +4,6 @@
  */
 package Assignment6Controller;
 
-import Assignment6Controller.*;
 import Assignment6Model.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 /**
  *
@@ -52,27 +52,40 @@ public class AccountDAO implements DAOInterface<BankAccount>{
         return res;
     }
 
-    // Method to retrieve a user from the database by ID
-    @Override
-    public BankAccount get(int anID) throws SQLException {
+    // Method to retrieve a user from the database by ID of customer
+
+    public ArrayList getList(int anID) throws SQLException {
 
         pStatement = connection.prepareStatement(AccountDataConnection.getSelect());
         pStatement.setInt(1,anID);
         result = pStatement.executeQuery();
-        
+
+        ArrayList bankAccList = new ArrayList();
+
         BankAccount updatedAct = null;
-        if (result.next()) {
+        while (result.next()) {
             if(result.getString("acct_type").equalsIgnoreCase(checking))
-                updatedAct = new CheckingAccount( result.getInt("id"));
-            else
-                updatedAct = new SavingsAccount( result.getInt("id"));
-            
+            {updatedAct = new CheckingAccount( result.getInt("id"));}
+            else {
+                updatedAct = new SavingsAccount(result.getInt("id"));
+            }
             updatedAct.setBalance(result.getFloat("balance"));
             LocalDate ld = createLocalDate(result.getString("create_date"));
             updatedAct.setCreateDate(ld);
+            updatedAct.setAccountNum(result.getInt("acct_num"));
+            updatedAct.setCustID(result.getInt("cust_id"));
+            ld = createLocalDate(result.getString("last_update_date"));
+            updatedAct.setLastUpDate(ld);
+            updatedAct.setOdLimit(result.getInt("od_limit"));
+            updatedAct.setIntRate(result.getFloat("int_rate"));
+
+            AccountTransactionDAO tr = new AccountTransactionDAO();
+            updatedAct.setTransactions(tr.getTransList(result.getInt("acct_num")));
+
+            bankAccList.add(updatedAct);
         }
       
-        return updatedAct;
+        return bankAccList;
     }
 
     private LocalDate createLocalDate(String dateStr) {
@@ -94,11 +107,11 @@ public class AccountDAO implements DAOInterface<BankAccount>{
         int result = -1;
        
         pStatement = connection.prepareStatement(AccountDataConnection.getUpdate());
-        pStatement.setString(1, act.getCustNum());
+        pStatement.setInt(1, act.getCustID());
         pStatement.setDouble(1, act.getBalance());
 
         pStatement.setString(2, act.getCreateDate().toString());
-        pStatement.setString(3, act.getType());
+        pStatement.setString(3, act.getAccType());
         pStatement.setInt(4, act.getAccountNum());
         result = pStatement.executeUpdate();
         
@@ -116,6 +129,27 @@ public class AccountDAO implements DAOInterface<BankAccount>{
         res = pStatement.executeUpdate();
         
         return res;
-    }  
+    }
+    @Override
+    public BankAccount get(int anID) throws SQLException {
+
+        pStatement = connection.prepareStatement(AccountDataConnection.getSelect());
+        pStatement.setInt(1,anID);
+        result = pStatement.executeQuery();
+
+        BankAccount updatedAct = null;
+        if (result.next()) {
+            if(result.getString("acct_type").equalsIgnoreCase(checking))
+                updatedAct = new CheckingAccount( result.getInt("id"));
+            else
+                updatedAct = new SavingsAccount( result.getInt("id"));
+
+            updatedAct.setBalance(result.getFloat("balance"));
+            LocalDate ld = createLocalDate(result.getString("create_date"));
+            updatedAct.setCreateDate(ld);
+        }
+
+        return updatedAct;
+    }
     
 }

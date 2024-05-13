@@ -4,7 +4,6 @@
  */
 package Assignment6Controller;
 
-import Assignment6Controller.*;
 import Assignment6Model.*;
 import java.sql.*;
 import java.sql.PreparedStatement;
@@ -25,7 +24,7 @@ public class CustomerDAO implements DAOInterface<BankCustomer> {
     PreparedStatement pStatement;
     ResultSet result;
     
-    CustomerDAO() {
+    public CustomerDAO() {
 
             connection = DataConnection.getDBConnection();      
 
@@ -56,11 +55,13 @@ public class CustomerDAO implements DAOInterface<BankCustomer> {
         return res;
     }
 
-    //PERSONAL*****88********
+    //will search for customers via custID and then put them in a list
 //    public ArrayList getCustListByID(ArrayList custID) throws SQLException {
 //
-//
 //        result = pStatement.executeQuery();
+//        for(int x=0; custID.size() > x; x++){
+//
+//        }
 //
 //        while(result.next()){
 //
@@ -79,9 +80,14 @@ public class CustomerDAO implements DAOInterface<BankCustomer> {
         
         BankCustomer updatedCust = null;
         if (result.next()) {
-            updatedCust = new BankCustomer( result.getInt("id"), result.getString("first_name"), result.getString("last_name"));
-            updatedCust.setEmail(result.getString("email"));
-            updatedCust.setEmail(result.getString("phone"));
+            updatedCust = new BankCustomer( result.getInt("id"), result.getString("first_name"), result.getString("last_name"),
+          result.getString("email"), result.getString("phone"),
+                    result.getString("sex"), result.getString("birthday"));
+            CustomerAddressDAO addy = new CustomerAddressDAO();
+            updatedCust.setAddress(addy.get(result.getInt("id")));
+            AccountDAO acc = new AccountDAO();
+            updatedCust.setAccounts(acc.getList(result.getInt("id")));
+
         }
 
 
@@ -101,7 +107,7 @@ public class CustomerDAO implements DAOInterface<BankCustomer> {
 
         pStatement.setString(2, cust.getEmail());
         pStatement.setString(3, cust.getPhone());
-        pStatement.setInt(4, cust.getCustomerNumber());
+        pStatement.setInt(4, cust.getCustomerID());
         result = pStatement.executeUpdate();
         
         return result;
@@ -114,7 +120,7 @@ public class CustomerDAO implements DAOInterface<BankCustomer> {
         int res = -1;
         
         pStatement = connection.prepareStatement(CustomerDataConnection.getDelete());
-        pStatement.setInt(1, cust.getCustomerNumber());
+        pStatement.setInt(1, cust.getCustomerID());
         res = pStatement.executeUpdate();
         
         return res;

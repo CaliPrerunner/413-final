@@ -22,7 +22,8 @@ public class BankCustomer implements Comparable<BankCustomer> {
     String phone;
     String email;
     String birthday;
-    int customerNumber;
+    int customerID;
+    String sex;
     List accounts = new ArrayList<BankAccount>();
     CustomerAddress address;
 
@@ -33,16 +34,26 @@ public class BankCustomer implements Comparable<BankCustomer> {
         firstName = fName;
         lastName = lName;
         customers.add(this);
-        customerNumber = ++custCount;
+        customerID = ++custCount;
     }
 
     public BankCustomer(int num, String fName, String lName) {
         firstName = fName;
         lastName = lName;
         customers.add(this);
-        customerNumber = num;
-    }    
-    
+        customerID = num;
+    }
+    public BankCustomer(int num, String fName, String lName,String eMail,String pho, String gender, String bday) {
+        firstName = fName;
+        lastName = lName;
+        customers.add(this);
+        customerID = num;
+        email = eMail;
+        phone = pho;
+        birthday = bday;
+        sex = gender;
+    }
+
     //All setters and getters for cusotmer 
 
     public String getEmail() {
@@ -120,14 +131,14 @@ public class BankCustomer implements Comparable<BankCustomer> {
         return custCount;
     }
     
-    public int getCustomerNumber() {
-        return customerNumber;
+    public int getCustomerID() {
+        return customerID;
     }
     
     public int compareTo(BankCustomer cust) {
 
-        int num1 = this.getCustomerNumber();
-        int num2 = cust.getCustomerNumber();
+        int num1 = this.getCustomerID();
+        int num2 = cust.getCustomerID();
         
         if(num1 == num2) return 0;
         else if(num1 > num2) return 1;
@@ -144,7 +155,7 @@ public class BankCustomer implements Comparable<BankCustomer> {
         
        String str = "\n";
        
-       str += this.getCustomerNumber();
+       str += this.getCustomerID();
        str += " : " + this.getName();
        str += " : " + this.getAddress();
        System.out.println(str);

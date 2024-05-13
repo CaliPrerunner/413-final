@@ -7,6 +7,8 @@ package Assignment6Controller;
 import Assignment6Model.*;
 import Assignment6Model.BankCustomer;
 import java.sql.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
 import java.util.HashMap;
@@ -92,6 +94,26 @@ public class AccountTransactionDAO implements DAOInterface<BankAccountTransactio
         System.out.println("Once created, cannot delete transaction for an account");
         
         return -1;
+    }
+
+    public ArrayList getTransList(int accID) throws SQLException {
+
+        pStatement = connection.prepareStatement(AddressDataConnection.getSelect());
+        pStatement.setInt(1, accID);
+        result = pStatement.executeQuery();
+        ArrayList accList = new ArrayList();
+        //will loop through the results and get the custID values form searching via the city
+        while (result.next()) {
+            BankAccountTransaction addt = null;
+            addt.setAmount(result.getInt("amount"));
+            addt.setDescription(result.getString("summary"));
+            addt.setID(result.getInt("acc_id"));
+            addt.setType(result.getString("tran_type"));
+            addt.setCreateDate(result.getTimestamp("create_date"));
+            accList.add(addt);
+        }
+        result.close();
+        return accList;
     }
     
 }

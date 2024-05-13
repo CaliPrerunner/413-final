@@ -12,11 +12,7 @@ import java.util.ArrayList;
  */
 public class CustomerList extends javax.swing.JFrame {
 
-    public static ArrayList custListt = new ArrayList();
 
-    public static void setCustListt(ArrayList t){
-        custListt = t;
-    }
 
     /**
      * Creates new form CustomerList
@@ -68,9 +64,9 @@ public class CustomerList extends javax.swing.JFrame {
 
 
         custList.setModel(new javax.swing.AbstractListModel<>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+            ArrayList t = custListt;
+            public int getSize() { return t.size(); }
+            public String getElementAt(int i) { return t.get(i).toString(); }
         });
         jScrollPane1.setViewportView(custList);
 
@@ -164,5 +160,10 @@ public class CustomerList extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
+    //personal added
+    public static ArrayList custListt = new ArrayList();
+    public static void setCustListt(ArrayList t){
+        custListt = t;
+    }
     // End of variables declaration//GEN-END:variables
 }

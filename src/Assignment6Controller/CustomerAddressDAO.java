@@ -57,7 +57,7 @@ public class CustomerAddressDAO implements DAOInterface<CustomerAddress> {
         return res;
     }
 
-    // Method to retrieve a uscustomeraddress from the database by ID
+    // Method to retrieve a cuscustomeraddress from the database by ID
     @Override
     public CustomerAddress get(int custID) throws SQLException {
 
@@ -67,7 +67,7 @@ public class CustomerAddressDAO implements DAOInterface<CustomerAddress> {
         
         CustomerAddress addr = null;
         if (result.next()) {
-            addr = new CustomerAddress( result.getInt("custid"),result.getInt("streetnum"), result.getString("streetname"), result.getString("city"), result.getString("state"), result.getInt("zip)"));
+            addr = new CustomerAddress( result.getInt("custid"),result.getInt("streetnum"), result.getString("streetname"), result.getString("city"), result.getString("state"), result.getInt("zip"));
         }
 
         return addr;
@@ -84,7 +84,7 @@ public class CustomerAddressDAO implements DAOInterface<CustomerAddress> {
         ArrayList custID = new ArrayList();
         //will loop through the results and get the custID values form searching via the city
         while (result.next()) {
-            custID.add(result.getInt("cusid"));
+            custID.add(result.getInt("custid"));
         }
         result.close();
         return custID;

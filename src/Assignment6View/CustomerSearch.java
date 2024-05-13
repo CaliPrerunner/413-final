@@ -5,6 +5,7 @@
 package Assignment6View;
 
 import Assignment6Controller.*;
+import Assignment6Model.BankCustomer;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -160,21 +161,22 @@ public class CustomerSearch extends javax.swing.JFrame {
         // TODO add your handling code here:
         String cityToSearch = cityAddy.getText();
         CustomerAddressDAO getter = new CustomerAddressDAO();
+
         ArrayList cl = new ArrayList();
         System.out.println(cityToSearch);
+
         try {
            cl = getter.getAddyID(cityToSearch);
         }catch (java.sql.SQLException t){
             System.out.println("MySQL DB error: " + t);
         }
-
         System.out.println(cl);
 
         //opens customer list GUI
         if(cl.size() != 0){
             //open cusomter list
-            new CustomerList().setVisible(true);
             CustomerList.setCustListt(cl);
+            new CustomerList().setVisible(true);
             //now we need to pass arraylist int cusotmer list
         }else{
             //display GUI error that there was no customers found

@@ -14,13 +14,13 @@ public class SavingsAccount extends BankAccount {
     public SavingsAccount() {
         super();
         balance = 2000;
-        this.setType("Savings");
+        this.setAccType("Savings");
     }
     
     public SavingsAccount(int bal) {
         super();
         balance = bal;
-        this.setType("Savings");
+        this.setAccType("Savings");
     } 
     
     public int compareTo(BankAccount ba) {

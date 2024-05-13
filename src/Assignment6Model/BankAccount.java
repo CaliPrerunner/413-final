@@ -5,6 +5,8 @@
 package Assignment6Model;
 
 import java.time.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -15,125 +17,99 @@ public abstract class BankAccount implements Comparable<BankAccount> {
     // Create instance variables
     public int accountNum;
     public LocalDate createDate;
+    public LocalDate lastUpdatedDate;
     public double balance;
-    public String type;
-    public int custNum;
-    
+    public String accType;
+    public int custID;
+    public int odLimit;
+    public double intRate;
+    public List transactions = new ArrayList<BankAccountTransaction>();
+
+
     static String bankName = "DefaultBankName";
     private int currentNumber = 0;
-    
-        //1-arg constructor
-    BankAccount() {
-        accountNum = currentNumber++;
-        createDate = LocalDate.now();
-        
-    }
-    
-    BankAccount(int actNum) {
-        accountNum = actNum;
-        createDate = LocalDate.now();
-        
-    }    
-    
-    // Setters and getters for the FriscoCommunityBankAccount object
-    
-    public java.time.LocalDate getCreateDate() {
-        return createDate;
-    }
-    
-    public void setCreateDate(java.time.LocalDate aDate) {
-        createDate = aDate;
-    }    
-    
-    public double getBalance() {
-        return balance;
-    }  
 
-    public void setBalance(double aBalance) {
-        balance = aBalance;
+    // Fully parameterized constructor
+    BankAccount(int accountNum,int custID, double balance,LocalDate createDate, String accType, int odLimit, int intRate, List transactions) {
+        this.accountNum = accountNum;
+        this.createDate = createDate;
+        this.balance = balance;
+        this.accType = accType;
+        this.custID = custID;
+        this.odLimit = odLimit;
+        this.intRate = intRate;
+        this.transactions = transactions;
     }
-    
-    public String getType() {
-        return type;
-    }  
-    
-    public void setType(String tp) {
-        type = tp;
+
+    public BankAccount() {
+
     }
-    
-    public int getAccountNum() {
+
+    public void setAccType(String s){
+        this.accType = s;
+    }
+
+    public void setAccountNum(int accountNum){
+        this.accountNum = accountNum;
+    }
+
+    public void setCustID(int custID){
+        this.custID = custID;
+    }
+    public void setLastUpDate(LocalDate d){
+        this.lastUpdatedDate=d;
+    }
+
+    public void setOdLimit(int odLimit){
+        this.odLimit = odLimit;
+    }
+
+    public void setIntRate(double intRate){
+        this.intRate = intRate;
+    }
+
+    public void setTransactions(List transactions){
+        this.transactions = transactions;
+    }
+
+    public LocalDate getCreateDate(){
+        return this.createDate;
+    }
+
+    public void setBalance(double b){
+        this.balance =b;
+    }
+
+    public void setCreateDate(LocalDate d){
+        this.createDate = d;
+    }
+
+    public int getAccountNum(){
         return accountNum;
     }
-    
-    public void setAccountNum(int num) {
-        accountNum = num;
+    public int getCustID(){
+        return custID;
+    }
+    public String getAccType(){
+        return accType;
+    }
+    public double getBalance(){
+        return balance;
     }
 
-        public String getName() {
-        return bankName;
+    public void deposit(double d){
+        this.balance += d;
     }
-    
-    public void setBankName(String name) {
-        bankName = name;
+    public void withdraw(double d){
+        this.balance -= d;
     }
-
-    public String getCustNum() {
-        return type;
-    }      
-
-    public void setCustNum(int num) {
-        custNum = num;
-    }    
-    
-    @Override
-    public int compareTo(BankAccount ba) {
-        return this.compareTo(ba);
-    }
-    
-    @Override
-    public String toString() {
-        
-        String str = "[ ";
-        
-        str += "Num: " + (this.getAccountNum() + " Create Date: " + this.createDate.toString() + " Balance: " + this.getBalance());
-        
-        return str + " ]";
-        
-    }
-    
-    public boolean withdraw(double amnt) {
-
-        boolean result = false;
-
-        if(this.balance > amnt) {
-            balance -= amnt;
-            result = true;
+    public void transfer(BankAccount destination, double ammount) {
+        if(ammount < balance){
+            destination.deposit(ammount);
+        }else{
+            System.out.println("Transaction failed");
         }
-        
-        return result;
-    
-    }
-        
-    public boolean deposit(double amnt) {
 
-            this.setBalance(balance + amnt);
-            return true;
-    
     }
-    
-    public boolean transfer(BankAccount acct, double amnt) {
 
-        boolean result = false;
-
-        if(acct.balance > amnt) {
-            acct.setBalance(balance - amnt);
-            this.setBalance(balance + amnt);
-            result = true;
-        }
-        
-        return result;
-    
-    }
-    
 }
-

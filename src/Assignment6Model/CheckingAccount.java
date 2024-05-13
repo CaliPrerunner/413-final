@@ -13,12 +13,12 @@ public class CheckingAccount extends BankAccount{
     
     public CheckingAccount() {
         super();
-        this.setType("Checking");
+        this.setAccType("Checking");
     }
     public CheckingAccount(int bal) {
         super();
         balance = bal;
-        this.setType("Checking");
+        this.setAccType("Checking");
     } 
     
     @Override
