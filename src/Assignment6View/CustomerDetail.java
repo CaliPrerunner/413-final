@@ -7,7 +7,6 @@ package Assignment6View;
 import Assignment6Model.BankCustomer;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -81,6 +80,9 @@ public class CustomerDetail extends javax.swing.JFrame {
         jLabel6.setText("Accounts:");
 
         actDetail.setText("Account Detail");
+
+        addressLabel.setText("Address: ");
+
         actDetail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 actDetailActionPerformed(evt);
@@ -118,6 +120,13 @@ public class CustomerDetail extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel5)
                                         .addGap(38, 38, 38)
+                                            //personal
+                                            .addComponent(addressLabel)
+                                            .addGap(38, 38, 38)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addComponent(addressbox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGap(38, 38, 38)
                                         .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel3)
@@ -233,6 +242,8 @@ public class CustomerDetail extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField4;
 
     //Personal Add-in's
+    private javax.swing.JTextField addressbox;
+    private javax.swing.JLabel addressLabel;
     public static BankCustomer selectedCust;
     public static ArrayList transList;
 
