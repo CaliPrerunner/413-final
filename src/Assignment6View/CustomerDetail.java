@@ -4,6 +4,8 @@
  */
 package Assignment6View;
 
+import Assignment6Model.BankCustomer;
+
 /**
  *
  * @author karunmehta
@@ -163,8 +165,10 @@ public class CustomerDetail extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //Account Detail button
     private void actDetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actDetailActionPerformed
         // TODO add your handling code here:
+        System.out.println("Selected: "+selectedCust);
     }//GEN-LAST:event_actDetailActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
@@ -206,6 +210,10 @@ public class CustomerDetail extends javax.swing.JFrame {
         });
     }
 
+    public static void setSelectedCust(BankCustomer c){
+        selectedCust = c;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton actDetail;
     private javax.swing.JButton cancel;
@@ -221,5 +229,9 @@ public class CustomerDetail extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
+
+    //Personal Add-in's
+    public static BankCustomer selectedCust;
+
     // End of variables declaration//GEN-END:variables
 }

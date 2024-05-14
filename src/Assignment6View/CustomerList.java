@@ -74,13 +74,12 @@ public class CustomerList extends javax.swing.JFrame {
         });
 
         //when i press on the obj in the list it does this:
+        //code to identiy what the user has selected in the list
         custList.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 if(!e.getValueIsAdjusting()){
-                    int selectedCustomerIndex = custList.getSelectedIndex();
-                    System.out.println("selected acc: " +custListt.get(selectedCustomerIndex).toString() );
-
+                    selectedCustIndex = custList.getSelectedIndex();
                 }
             }
         });
@@ -133,6 +132,9 @@ public class CustomerList extends javax.swing.JFrame {
 
     private void detailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_detailsActionPerformed
         // TODO add your handling code here:
+
+        CustomerDetail.setSelectedCust((BankCustomer) custListt.get(selectedCustIndex));
+        new CustomerDetail().setVisible(true);
     }//GEN-LAST:event_detailsActionPerformed
 
     /**
@@ -182,5 +184,6 @@ public class CustomerList extends javax.swing.JFrame {
     public static void setCustListt(ArrayList t){
         custListt = t;
     }
+    public static int selectedCustIndex;
     // End of variables declaration//GEN-END:variables
 }
