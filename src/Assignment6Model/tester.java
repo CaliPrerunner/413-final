@@ -7,15 +7,21 @@ import java.util.ArrayList;
 
 public class tester {
     public static void main(String args[]) {
-        CustomerDAO getter = new CustomerDAO();
-        BankCustomer end = new BankCustomer();
-        ArrayList IDList = new ArrayList();
-        try {
-            IDList = getter.getALlCustomers();
-        }catch( SQLException y){
-            System.out.println(y);
-        }
-        System.out.println(end.toString());
+        CustomerDTO setter = new CustomerDTO();
+        BankCustomer n = new BankCustomer();
+        n.email = "NEWNEW";
+        //n.phone = "iphone";
+        n.customerID=  1;
+        int end ;
+        end =  setter.performUpdate(n);
+        System.out.println(end);
+
+//        try {
+//
+//        }catch( SQLException y){
+//            System.out.println(y);
+//        }
+//        System.out.println(end.toString());
     }
 // have to edit transaction logic bc not all data is entered/filled
     //from sql database

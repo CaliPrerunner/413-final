@@ -161,16 +161,15 @@ public class CustomerSearch extends javax.swing.JFrame {
         // TODO add your handling code here:
         String cityToSearch = cityAddy.getText();
         CustomerAddressDAO getter = new CustomerAddressDAO();
-        CustomerDAO c = new CustomerDAO();
+        CustomerDTO c = new CustomerDTO();
         //this array holds the custID of the list of customers from the
         //given city from the sesarch
         ArrayList cl = new ArrayList();
         ArrayList Customers = new ArrayList();
-
         try {
            cl = getter.getAddyID(cityToSearch);
            for(int x=0; cl.size()>x;x++){
-               Customers.add(c.get((int) cl.get(x)));
+               Customers.add(c.customerByID((int) cl.get(x)));
            }
         }catch (java.sql.SQLException t){
             System.out.println("MySQL DB error: " + t);

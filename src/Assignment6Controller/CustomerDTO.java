@@ -44,6 +44,7 @@ public class CustomerDTO {
         return anCustomer;
         
 }
+
     
     public static int performUpdate(BankCustomer aCustomer) {
 
@@ -52,10 +53,12 @@ public class CustomerDTO {
         try {
             updateResult = cd.update(aCustomer);
         } catch(SQLException se) {
-            System.out.println(se.getMessage());
+            System.out.println("Error updating Customer: "+se.getMessage());
         }
         
-        if(updateResult != -1) System.out.println("\nUpdate Successful");
+        if(updateResult != -1){
+            System.out.println("\nUpdate Successful");
+        }
          System.out.println("Customer Details:\n" + aCustomer.toString());
         return updateResult;        
     }

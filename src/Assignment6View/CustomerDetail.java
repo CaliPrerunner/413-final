@@ -4,8 +4,11 @@
  */
 package Assignment6View;
 
+import Assignment6Controller.CustomerDTO;
 import Assignment6Model.BankCustomer;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 /**
@@ -30,39 +33,40 @@ public class CustomerDetail extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        CustDetailLabel = new javax.swing.JLabel();
+        FirstNameBox = new javax.swing.JTextField();
+        LastNameBox = new javax.swing.JTextField();
+        emailBox = new javax.swing.JTextField();
+        phoneBox = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        firstNameLabel = new javax.swing.JLabel();
+        LastNameLabel = new javax.swing.JLabel();
+        emailLabel = new javax.swing.JLabel();
+        phoneLabel = new javax.swing.JLabel();
+        accountLabel = new javax.swing.JLabel();
         actDetail = new javax.swing.JButton();
         cancel = new javax.swing.JButton();
         addressLabel = new javax.swing.JLabel();
         addressbox = new javax.swing.JTextField();
+        updateAddress = new javax.swing.JButton();
+        saveButt = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
-        jLabel1.setText("Customer Detail");
+        CustDetailLabel.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        CustDetailLabel.setText("Customer Detail");
 
-        jTextField1.setText(selectedCust.getFirstName());
-
-        jTextField2.setText(selectedCust.getLastName());
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        FirstNameBox.setText(selectedCust.getFirstName());
+        LastNameBox.setText(selectedCust.getLastName());
+        emailBox.setText(selectedCust.getEmail());
+        saveButt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                EmailandPhoneBoxAction(evt);
             }
         });
+        phoneBox.setText(selectedCust.getPhone());
 
-        jTextField3.setText(selectedCust.getEmail());
-        jTextField4.setText(selectedCust.getPhone());
         addressbox.setText(selectedCust.getAddress().toString());
 
         jList1.setModel(new javax.swing.AbstractListModel<>() {
@@ -72,19 +76,30 @@ public class CustomerDetail extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jList1);
 
-        jLabel2.setText("First Name:");
+        firstNameLabel.setText("First Name:");
 
-        jLabel3.setText("Last Name:");
+        LastNameLabel.setText("Last Name:");
 
-        jLabel4.setText("Email:");
+        emailLabel.setText("Email:");
 
-        jLabel5.setText("Phone:");
+        phoneLabel.setText("Phone:");
 
-        jLabel6.setText("Accounts:");
+        accountLabel.setText("Accounts:");
 
         actDetail.setText("Account Detail");
 
         addressLabel.setText("Address: ");
+
+        updateAddress.setText("Update Address");
+        saveButt.setText("Save Customer Details");
+
+        updateAddress.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //opens address GUI to display the account details
+                //am waiting for professor to give it to us
+            }
+        });
 
         actDetail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,6 +108,7 @@ public class CustomerDetail extends javax.swing.JFrame {
         });
 
         cancel.setText("Cancel");
+
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -103,35 +119,35 @@ public class CustomerDetail extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(146, 146, 146)
-                        .addComponent(jLabel1))
+                        .addComponent(CustDetailLabel))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(16, 16, 16)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6)
+                                .addComponent(accountLabel)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(jScrollPane1)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel2)
+                                    .addComponent(firstNameLabel)
                                         .addComponent(addressLabel)
-                                    .addComponent(jLabel4))
+                                    .addComponent(emailLabel))
                                     .addComponent(addressbox)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(FirstNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(emailBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel5)
+                                        .addComponent(phoneLabel)
                                         .addGap(38, 38, 38)
                                         .addGap(38, 38, 38)
-                                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(phoneBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
+                                        .addComponent(LastNameLabel)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(LastNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(26, 26, 26)))))
                 .addGap(30, 30, 30))
             .addGroup(layout.createSequentialGroup()
@@ -145,6 +161,10 @@ public class CustomerDetail extends javax.swing.JFrame {
 //
                     .addGap(73, 73, 73)
                 .addComponent(cancel)
+                    .addGap(73, 73, 73)
+                    .addComponent(updateAddress)
+                    .addGap(73, 73, 73)
+                    .addComponent(saveButt)
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -152,37 +172,38 @@ public class CustomerDetail extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(jLabel1)
+                .addComponent(CustDetailLabel)
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2)
-                                .addComponent(jLabel3))
+                            .addComponent(LastNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(firstNameLabel)
+                                .addComponent(LastNameLabel))
                         .addGap(28, 28, 28)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4)
-                                .addComponent(jLabel5)))
+                            .addComponent(phoneBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(emailLabel)
+                                .addComponent(phoneLabel)))
                         .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(FirstNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(emailBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     //added
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(addressLabel)
                             .addComponent(addressbox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
 
                     .addGap(9, 9, 9)
-                .addComponent(jLabel6)
+                .addComponent(accountLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(actDetail)
-                    .addComponent(cancel))
-
+                    .addComponent(cancel)
+                        .addComponent(updateAddress)
+                        .addComponent(saveButt))
                 .addContainerGap(8, Short.MAX_VALUE))
         );
 
@@ -195,8 +216,24 @@ public class CustomerDetail extends javax.swing.JFrame {
         System.out.println("Selected: "+selectedCust);
     }//GEN-LAST:event_actDetailActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    //action when user presses enter into email box
+    private void EmailandPhoneBoxAction(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
+
+        //if the strings in either of the email/phone text boxes do not match the data in the seleted customer,
+        //then update them in the selectedCustomer object and update the mySQL database with it
+        if((!selectedCust.getEmail().equals(emailBox.getText())) || (!selectedCust.getPhone().equals(phoneBox.getText()))){
+            selectedCust.setEmail(emailBox.getText());
+            selectedCust.setPhone(phoneBox.getText());
+            CustomerDTO setter = new CustomerDTO();
+            setter.performUpdate(selectedCust);
+        }else{
+            //add pop up box to display no data has been updated
+            System.out.println("no data updated");
+        }
+
+
+
     }//GEN-LAST:event_jTextField2ActionPerformed
 
     /**
@@ -241,24 +278,26 @@ public class CustomerDetail extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton actDetail;
     private javax.swing.JButton cancel;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel CustDetailLabel;
+    private javax.swing.JLabel firstNameLabel;
+    private javax.swing.JLabel LastNameLabel;
+    private javax.swing.JLabel emailLabel;
+    private javax.swing.JLabel phoneLabel;
+    private javax.swing.JLabel accountLabel;
     private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField FirstNameBox;
+    private javax.swing.JTextField LastNameBox;
+    private javax.swing.JTextField emailBox;
+    private javax.swing.JTextField phoneBox;
 
     //Personal Add-in's
     private javax.swing.JTextField addressbox;
     private javax.swing.JLabel addressLabel;
     public static BankCustomer selectedCust;
     public static ArrayList transList;
+    public javax.swing.JButton updateAddress;
+    public javax.swing.JButton saveButt;
 
     // End of variables declaration//GEN-END:variables
 }

@@ -86,5 +86,9 @@ public class CustomerAddress {
     public void setID(int custID) {
         this.id = custID;
     }
+
+    public String toString(){
+        return streetnum +" " + streetname + " "+ city + " " + state + " " + zip;
+    }
     
 }

@@ -82,21 +82,22 @@ public class CustomerDAO implements DAOInterface<BankCustomer> {
         return updatedCust;
     }
 
-    // Method to update a user in the database
+    // Method to update a user Email and Phone only in the database
+    //made for to update the customer details in the CustomerDetail.java class
+    //only updates email and phone becuase the name, gender, and bday are all vital aspects
+    //that should not be able to easily change by the use
+
+    //IF IN THE CASE YOU NEED TO USE THE UPDATE AGAIN YOU
     @Override
     public int update(BankCustomer cust) throws SQLException {
         
         int result = -1;
         
         pStatement = connection.prepareStatement(CustomerDataConnection.getUpdate());
-        pStatement.setString(1, cust.getFirstName());
-        pStatement.setString(1, cust.getLastName());
-
-        pStatement.setString(2, cust.getEmail());
-        pStatement.setString(3, cust.getPhone());
-        pStatement.setInt(4, cust.getCustomerID());
+        pStatement.setString(1, cust.getEmail());
+        pStatement.setString(2, cust.getPhone());
+        pStatement.setInt(3, cust.getCustomerID());
         result = pStatement.executeUpdate();
-        
         return result;
     }
 
