@@ -4,6 +4,7 @@
  */
 package Assignment6Model;
 
+import java.text.DecimalFormat;
 import java.time.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -65,7 +66,8 @@ public abstract class BankAccount implements Comparable<BankAccount> {
     }
 
     public void setIntRate(double intRate){
-        this.intRate = intRate;
+        DecimalFormat df = new DecimalFormat("0.00");
+        this.intRate = Double.valueOf(df.format(intRate));
     }
 
     public void setTransactions(List transactions){
@@ -96,6 +98,7 @@ public abstract class BankAccount implements Comparable<BankAccount> {
     public double getBalance(){
         return balance;
     }
+    public ArrayList getTransactions(){return (ArrayList)transactions;}
 
     public void deposit(double d){
         this.balance += d;
@@ -110,6 +113,17 @@ public abstract class BankAccount implements Comparable<BankAccount> {
             System.out.println("Transaction failed");
         }
 
+    }
+    public String getAccString(){
+        if(accType.equals("CH")){
+            return "Checking";
+        }else{
+            return "Savings";
+        }
+    }
+    public String toString(){
+        return "Account Number: " + accountNum+ " Account Type: " + this.getAccString() +" Balance: " + balance
+                + " Interest Rate: " + intRate+ "%";
     }
 
 }

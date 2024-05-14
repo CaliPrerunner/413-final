@@ -6,6 +6,9 @@ package Assignment6View;
 
 import Assignment6Model.BankCustomer;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author karunmehta
@@ -48,23 +51,22 @@ public class CustomerDetail extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         jLabel1.setText("Customer Detail");
 
-        jTextField1.setText("first name");
+        jTextField1.setText(selectedCust.getFirstName());
 
-        jTextField2.setText("last name");
+        jTextField2.setText(selectedCust.getLastName());
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
             }
         });
 
-        jTextField3.setText("email");
+        jTextField3.setText(selectedCust.getEmail());
+        jTextField4.setText(selectedCust.getPhone());
 
-        jTextField4.setText("phone");
-
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+        jList1.setModel(new javax.swing.AbstractListModel<>() {
+             ArrayList t = selectedCust.getAccounts();
+            public int getSize() { return t.size(); }
+            public String getElementAt(int i) { return t.get(i).toString(); }
         });
         jScrollPane1.setViewportView(jList1);
 
@@ -232,6 +234,7 @@ public class CustomerDetail extends javax.swing.JFrame {
 
     //Personal Add-in's
     public static BankCustomer selectedCust;
+    public static ArrayList transList;
 
     // End of variables declaration//GEN-END:variables
 }

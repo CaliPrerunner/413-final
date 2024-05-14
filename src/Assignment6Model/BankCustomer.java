@@ -24,7 +24,7 @@ public class BankCustomer implements Comparable<BankCustomer> {
     String birthday;
     int customerID;
     String sex;
-    List accounts = new ArrayList<BankAccount>();
+    ArrayList accounts = new ArrayList<BankAccount>();
     CustomerAddress address;
 
     public BankCustomer() {}
@@ -89,7 +89,7 @@ public class BankCustomer implements Comparable<BankCustomer> {
         lastName = nm;
     }
 
-    public List getAccounts() {
+    public ArrayList getAccounts() {
         return accounts;
     }
     
@@ -97,7 +97,7 @@ public class BankCustomer implements Comparable<BankCustomer> {
         return address;
     }
     
-    public void setAccounts(List acts) {
+    public void setAccounts(ArrayList acts) {
         accounts = acts;
     }    
     
