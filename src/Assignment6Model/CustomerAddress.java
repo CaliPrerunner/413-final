@@ -26,7 +26,7 @@ public class CustomerAddress {
      * @param zp 
      */
     public CustomerAddress(int custID, int num, String street, String aCity, String st, int zp) {
-        int id = custID;
+         id = custID;
         streetnum = num;
         streetname = street;
         city = aCity;

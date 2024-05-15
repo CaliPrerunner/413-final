@@ -4,6 +4,8 @@
  */
 package Assignment6View;
 
+import Assignment6Model.BankAccount;
+
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
@@ -49,7 +51,9 @@ public class AccountList extends javax.swing.JFrame {
         details.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-              AccountDetail.setaccountSelected(bankAccList);
+              AccountDetail.setaccountSelected((BankAccount)
+                      BankAccountList.get(selectedAccIndex));
+              new AccountDetail().setVisible(true);
             }
         });
 

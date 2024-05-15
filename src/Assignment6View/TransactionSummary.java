@@ -4,6 +4,9 @@
  */
 package Assignment6View;
 
+import Assignment6Controller.CustomerDTO;
+import Assignment6Model.BankCustomer;
+
 /**
  *
  * @author karunmehta
@@ -155,5 +158,13 @@ public class TransactionSummary extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
+
+    //gets the anme
+//    public String getcustName(){
+//        CustomerDTO t = new CustomerDTO();
+//        //BankCustomer tt = t.customerByID(accountSelected.getCustID());
+//        return tt.getFirstName() + " " + tt.getLastName();
+//    }
+
     // End of variables declaration//GEN-END:variables
 }

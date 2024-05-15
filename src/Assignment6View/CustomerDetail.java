@@ -7,7 +7,9 @@ package Assignment6View;
 import Assignment6Controller.BankAccountDTO;
 import Assignment6Controller.CustomerDTO;
 import Assignment6Model.BankCustomer;
+import Assignment6Model.CustomerAddress;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -98,7 +100,9 @@ public class CustomerDetail extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //opens address GUI to display the account details
-                //am waiting for professor to give it to us
+                CustomerAddressView.setCustAddy(selectedCust.getAddress());
+                new CustomerAddressView().setVisible(true);
+
             }
         });
 
@@ -217,8 +221,6 @@ public class CustomerDetail extends javax.swing.JFrame {
         BankAccountDTO getter = new BankAccountDTO();
         ArrayList t= new ArrayList();
         AccountList.setBankAccountList(getter.BankAccountByCustID(selectedCust.getCustomerID()));
-        int x =1;
-        //AccountList.setBankAccountList(selectedCust.getAccounts());
         new AccountList().setVisible(true);
     }//GEN-LAST:event_actDetailActionPerformed
 
@@ -228,14 +230,16 @@ public class CustomerDetail extends javax.swing.JFrame {
 
         //if the strings in either of the email/phone text boxes do not match the data in the seleted customer,
         //then update them in the selectedCustomer object and update the mySQL database with it
-        if((!selectedCust.getEmail().equals(emailBox.getText())) || (!selectedCust.getPhone().equals(phoneBox.getText()))){
+        if((!selectedCust.getEmail().equals(emailBox.getText())) || (!selectedCust.getPhone().equals(phoneBox.getText()))) {
             selectedCust.setEmail(emailBox.getText());
             selectedCust.setPhone(phoneBox.getText());
             CustomerDTO setter = new CustomerDTO();
-            setter.performUpdate(selectedCust);
-        }else{
-            //add pop up box to display no data has been updated
-            System.out.println("no data updated");
+            int r = setter.performUpdate(selectedCust);
+            if (r == 1) {
+                JOptionPane.showMessageDialog(null, "Customer update was Successful");
+            }else{
+                JOptionPane.showMessageDialog(null, "Customer update was Successful");
+            }
         }
 
 

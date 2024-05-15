@@ -19,7 +19,7 @@ public class AddressDataConnection extends DataConnection {
 
 
     // SQL queries to be used to persist customer business objects as needed by the DAO
-    private static final String INSERT_SQL = "INSERT INTO customeraddress (first_name, last_name, email, phone, birthday) VALUES (?, ?, ?, ?,?)";
+    private static final String INSERT_SQL = "INSERT INTO customeraddress (streetnum, streetname, city, state, zip) VALUES (?, ?, ?, ?,?)";
     private static final String SELECT_SQL_BYID = "SELECT * FROM customeraddress WHERE custid = ?";
     private static final String UPDATE_SQL = "UPDATE customeraddress SET username = ?, email = ?, phone = ? WHERE id = ?";
     private static final String DELETE_SQL = "DELETE FROM customeraddress WHERE id = ?";

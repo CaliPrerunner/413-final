@@ -5,13 +5,9 @@
 package Assignment6Controller;
 
 import Assignment6Model.*;
-import Assignment6Model.BankCustomer;
+
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.HashMap;
-import javax.swing.JOptionPane;
-import java.util.HashMap;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -44,7 +40,7 @@ public class CustomerAddressDAO implements DAOInterface<CustomerAddress> {
     public int create(CustomerAddress addr) throws SQLException {
         
         int res = -1;
-        pStatement = connection.prepareStatement(CustomerDataConnection.getInsert());
+        pStatement = connection.prepareStatement(AddressDataConnection.getInsert());
         pStatement.setInt(1, addr.getStreetNum());
         pStatement.setString(2, addr.getStreetName());
         pStatement.setString(3, addr.getCity());
