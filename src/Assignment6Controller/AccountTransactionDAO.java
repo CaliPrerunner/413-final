@@ -5,14 +5,9 @@
 package Assignment6Controller;
 
 import Assignment6Model.*;
-import Assignment6Model.BankCustomer;
+
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
-import javax.swing.JOptionPane;
-import java.util.HashMap;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -61,7 +56,7 @@ public class AccountTransactionDAO implements DAOInterface<BankAccountTransactio
     @Override
     public BankAccountTransaction get(int acctID) throws SQLException {
 
-        pStatement = connection.prepareStatement(AccountDataConnection.getSelect());
+        pStatement = connection.prepareStatement(BankAccountDataConnection.getSelect());
         pStatement.setInt(1,acctID);
         result = pStatement.executeQuery();
         

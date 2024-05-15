@@ -17,7 +17,7 @@ import java.util.ArrayList;
  *
  * @author karunmehta
  */
-public class AccountDAO implements DAOInterface<BankAccount>{
+public class BankAccountDAO implements DAOInterface<BankAccount>{
 
     static Connection connection = null;
     PreparedStatement pStatement;
@@ -25,7 +25,7 @@ public class AccountDAO implements DAOInterface<BankAccount>{
     final String checking = "CH";
     final String saving = "SV";
 
-    AccountDAO() {
+    BankAccountDAO() {
 
         connection = DataConnection.getDBConnection();
 
@@ -43,7 +43,7 @@ public class AccountDAO implements DAOInterface<BankAccount>{
     public int create(BankAccount act) throws SQLException {
         
         int res = -1;
-        pStatement = connection.prepareStatement(AccountDataConnection.getInsert());
+        pStatement = connection.prepareStatement(BankAccountDataConnection.getInsert());
         pStatement.setInt(1, act.getAccountNum());
         pStatement.setDouble(2, act.getBalance());
         res = pStatement.executeUpdate();
@@ -56,7 +56,7 @@ public class AccountDAO implements DAOInterface<BankAccount>{
 
     public ArrayList getList(int anID) throws SQLException {
 
-        pStatement = connection.prepareStatement(AccountDataConnection.getSelect());
+        pStatement = connection.prepareStatement(BankAccountDataConnection.getSelect());
         pStatement.setInt(1,anID);
         result = pStatement.executeQuery();
 
@@ -108,7 +108,7 @@ public class AccountDAO implements DAOInterface<BankAccount>{
         
         int result = -1;
        
-        pStatement = connection.prepareStatement(AccountDataConnection.getUpdate());
+        pStatement = connection.prepareStatement(BankAccountDataConnection.getUpdate());
         pStatement.setInt(1, act.getCustID());
         pStatement.setDouble(1, act.getBalance());
 
@@ -126,7 +126,7 @@ public class AccountDAO implements DAOInterface<BankAccount>{
         
         int res = -1;
         
-        pStatement = connection.prepareStatement(AccountDataConnection.getDelete());
+        pStatement = connection.prepareStatement(BankAccountDataConnection.getDelete());
         pStatement.setInt(1, act.getAccountNum());
         res = pStatement.executeUpdate();
         
@@ -135,7 +135,7 @@ public class AccountDAO implements DAOInterface<BankAccount>{
     @Override
     public BankAccount get(int anID) throws SQLException {
 
-        pStatement = connection.prepareStatement(AccountDataConnection.getSelect());
+        pStatement = connection.prepareStatement(BankAccountDataConnection.getSelect());
         pStatement.setInt(1,anID);
         result = pStatement.executeQuery();
 

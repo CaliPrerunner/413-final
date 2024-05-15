@@ -11,7 +11,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -72,7 +71,7 @@ public class CustomerDAO implements DAOInterface<BankCustomer> {
                     result.getString("sex"), result.getString("birthday"));
             CustomerAddressDAO addy = new CustomerAddressDAO();
             updatedCust.setAddress(addy.get(result.getInt("id")));
-            AccountDAO acc = new AccountDAO();
+            BankAccountDAO acc = new BankAccountDAO();
             updatedCust.setAccounts(acc.getList(result.getInt("id")));
 
         }

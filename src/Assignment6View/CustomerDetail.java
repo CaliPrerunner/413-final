@@ -4,6 +4,7 @@
  */
 package Assignment6View;
 
+import Assignment6Controller.BankAccountDTO;
 import Assignment6Controller.CustomerDTO;
 import Assignment6Model.BankCustomer;
 
@@ -86,7 +87,7 @@ public class CustomerDetail extends javax.swing.JFrame {
 
         accountLabel.setText("Accounts:");
 
-        actDetail.setText("Account Detail");
+        actDetail.setText("Show Account");
 
         addressLabel.setText("Address: ");
 
@@ -210,10 +211,15 @@ public class CustomerDetail extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    //Account Detail button
+    //Account Detail button opens AccountList.java and passes the bankaccount list variable
     private void actDetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actDetailActionPerformed
         // TODO add your handling code here:
-        System.out.println("Selected: "+selectedCust);
+        BankAccountDTO getter = new BankAccountDTO();
+        ArrayList t= new ArrayList();
+        AccountList.setBankAccountList(getter.BankAccountByCustID(selectedCust.getCustomerID()));
+        int x =1;
+        //AccountList.setBankAccountList(selectedCust.getAccounts());
+        new AccountList().setVisible(true);
     }//GEN-LAST:event_actDetailActionPerformed
 
     //action when user presses enter into email box

@@ -115,7 +115,7 @@ public abstract class BankAccount implements Comparable<BankAccount> {
 
     }
     public String getAccString(){
-        if(accType.equals("CH")){
+        if(accType.equals("Checking")){
             return "Checking";
         }else{
             return "Savings";
