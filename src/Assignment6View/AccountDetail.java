@@ -4,6 +4,8 @@
  */
 package Assignment6View;
 
+import Assignment6Model.BankAccount;
+
 /**
  *
  * @author karunmehta
@@ -181,5 +183,12 @@ public class AccountDetail extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
+
+    //personal
+    public static BankAccount accountSelected;
+    public static void setaccountSelected(BankAccount a){
+        accountSelected = a;
+    }
+
     // End of variables declaration//GEN-END:variables
 }

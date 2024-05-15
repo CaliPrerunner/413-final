@@ -49,11 +49,7 @@ public class AccountList extends javax.swing.JFrame {
         details.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //********************************************
-                //********************************************
-                //will give us GUI Accouny detail and this is where we open
-                // that accountDeail GUI with selectedAccIndex variable
-                //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+              AccountDetail.setaccountSelected(bankAccList);
             }
         });
 
