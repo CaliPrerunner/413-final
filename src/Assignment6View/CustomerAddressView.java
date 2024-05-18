@@ -4,9 +4,14 @@
  */
 package Assignment6View;
 
+import Assignment6Controller.CustomerAddressDTO;
 import Assignment6Controller.CustomerDTO;
 import Assignment6Model.BankCustomer;
 import Assignment6Model.CustomerAddress;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  *
@@ -31,12 +36,12 @@ public class CustomerAddressView extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        CustNameLabel = new javax.swing.JLabel();
+        streetNumberLabel = new javax.swing.JLabel();
+        streetNameLabel = new javax.swing.JLabel();
+        cityLabel = new javax.swing.JLabel();
+        stateLabel = new javax.swing.JLabel();
+        zipLabel = new javax.swing.JLabel();
         custNameBox = new javax.swing.JTextField();
         stNumBox = new javax.swing.JTextField();
         stNameBox = new javax.swing.JTextField();
@@ -51,17 +56,17 @@ public class CustomerAddressView extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel1.setText("Customer Address");
 
-        jLabel2.setText("Cust Name:");
+        CustNameLabel.setText("Cust Name:");
 
-        jLabel3.setText("St. Num:");
+        streetNumberLabel.setText("St. Num:");
 
-        jLabel4.setText("St. Name:");
+        streetNameLabel.setText("St. Name:");
 
-        jLabel5.setText("City:");
+        cityLabel.setText("City:");
 
-        jLabel6.setText("State:");
+        stateLabel.setText("State:");
 
-        jLabel7.setText("Zip:");
+        zipLabel.setText("Zip:");
 
         custNameBox.setText(getcustName());
 
@@ -76,8 +81,36 @@ public class CustomerAddressView extends javax.swing.JFrame {
         zipBox.setText(Integer.toString(addy.getZip()));
 
         jButton1.setText("Update Address");
+        jButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(!addy.getCity().equals(cityBox.getText())) {
+                    addy.setCity(cityBox.getText());
+                }else if(!addy.getState().equals(stateBox.getText())) {
+                    addy.setState(stateBox.getText());
+                }
+                else if(!addy.getStreetName().equals(stNameBox.getText())) {
+                    addy.setStreet(stNameBox.getText());
+                }
+                else if(addy.getStreetNum() != Integer.parseInt(stNumBox.getText())) {
+                    addy.setStreetNum(Integer.parseInt(stNumBox.getText()));
+                }
+                else if(addy.getZip() != Integer.parseInt(zipBox.getText())) {
+                    addy.setZip(Integer.parseInt(zipBox.getText()));
+                } else{
+                    JOptionPane.showMessageDialog(null, "None of the attributes have been updated");
+                }
+
+                CustomerAddressDTO setter = new CustomerAddressDTO();
+
+
+                JOptionPane.showMessageDialog(null, "Update sucesful");
+
+            }
+        });
 
         jButton2.setText("Cancel");
+
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -102,9 +135,9 @@ public class CustomerAddressView extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel5))
+                            .addComponent(streetNumberLabel)
+                            .addComponent(CustNameLabel)
+                            .addComponent(cityLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
@@ -113,14 +146,14 @@ public class CustomerAddressView extends javax.swing.JFrame {
                                     .addComponent(stNumBox))
                                 .addGap(13, 13, 13)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel4))
+                                    .addComponent(stateLabel)
+                                    .addComponent(streetNameLabel))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(stateBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jLabel7)
+                                        .addComponent(zipLabel)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(zipBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(stNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -134,19 +167,19 @@ public class CustomerAddressView extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
+                    .addComponent(CustNameLabel)
                     .addComponent(custNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
+                    .addComponent(streetNumberLabel)
+                    .addComponent(streetNameLabel)
                     .addComponent(stNumBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(stNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7)
+                    .addComponent(cityLabel)
+                    .addComponent(stateLabel)
+                    .addComponent(zipLabel)
                     .addComponent(cityBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(stateBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(zipBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -171,7 +204,7 @@ public class CustomerAddressView extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -203,12 +236,12 @@ public class CustomerAddressView extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel CustNameLabel;
+    private javax.swing.JLabel streetNumberLabel;
+    private javax.swing.JLabel streetNameLabel;
+    private javax.swing.JLabel cityLabel;
+    private javax.swing.JLabel stateLabel;
+    private javax.swing.JLabel zipLabel;
     private javax.swing.JTextField custNameBox;
     private javax.swing.JTextField stNumBox;
     private javax.swing.JTextField stNameBox;
@@ -228,9 +261,11 @@ public class CustomerAddressView extends javax.swing.JFrame {
     }
 
     // TODO: NEXT THING TO DO
+
+
     //NEED TO ALLOW FOR EDIT OF ADDRESS OBJECTS
     //THEN
-    //work on opening and displaying the transactios objects form the transactions summary page
+    //work on opening and displaying the transactios objects from the transactions summary page
     //THEN
     //LOOK at what the professor said about what you did
     //**************************************

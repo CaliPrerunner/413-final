@@ -238,7 +238,7 @@ public class CustomerDetail extends javax.swing.JFrame {
             if (r == 1) {
                 JOptionPane.showMessageDialog(null, "Customer update was Successful");
             }else{
-                JOptionPane.showMessageDialog(null, "Customer update was Successful");
+                JOptionPane.showMessageDialog(null, "Customer update was Unsuccessful");
             }
         }
 
