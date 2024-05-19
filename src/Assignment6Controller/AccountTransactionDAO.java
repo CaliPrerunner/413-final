@@ -7,6 +7,8 @@ package Assignment6Controller;
 import Assignment6Model.*;
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 /**
@@ -71,6 +73,25 @@ public class AccountTransactionDAO implements DAOInterface<BankAccountTransactio
         }
 
         return at;
+    }
+    public ArrayList getList(int acctID) throws SQLException {
+
+        pStatement = connection.prepareStatement(BankAccountDataConnection.getSelect());
+        pStatement.setInt(1,acctID);
+        result = pStatement.executeQuery();
+        BankAccountTransaction at = null;
+        ArrayList list = new ArrayList();
+        while (result.next()) {
+            at = new BankAccountTransaction();
+            DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yy");
+            at.setCreateDate(LocalDate.parse(result.getTimestamp("create_date"),format));
+            at.setType(result.getString("tran_type"));
+            at.setAmount(result.getDouble("amount"));
+            at.setDescription(result.getString("summary"));
+            at.setID(result.getInt("acct_id"));
+            list.add(at);
+        }
+        return list;
     }
 
     // Updating transaction not allowed

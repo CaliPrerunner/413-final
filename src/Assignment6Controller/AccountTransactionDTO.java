@@ -28,20 +28,31 @@ public class AccountTransactionDTO {
         
 
     }
+    public static ArrayList transactionListByID(int anId) {
+
+        ArrayList list = null;
+
+        try {
+            list = ato.getList(anId);
+        } catch(SQLException se) {
+
+            System.out.println(se.getMessage());
+        }
+
+        return list;
+
+    }
     
     public static BankAccountTransaction transactionByAccountID(int anId) {
         
         BankAccountTransaction tran = null;
         
         try {
-            
             tran = ato.get(anId);
-            System.out.println("\nFetched Customer Address with CustomerID: " + anId + " Address Details:\n" + tran.toString());  
-        
+            System.out.println("\nFetched Customer Address with CustomerID: " + anId + " Address Details:\n" + tran.toString());
         } catch(SQLException se) {
         
             System.out.println(se.getMessage());
-        
         }
               
         return tran;

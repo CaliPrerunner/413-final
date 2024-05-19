@@ -8,6 +8,7 @@
 //so that these vales can be displayed in the GUI
 package Assignment6View;
 
+import Assignment6Controller.AccountTransactionDTO;
 import Assignment6Controller.BankAccountDTO;
 import Assignment6Controller.CustomerDTO;
 import Assignment6Model.BankAccount;
@@ -17,6 +18,11 @@ import Assignment6Model.SavingsAccount;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
+// TODO:
+// add intrest rate and over draft and last update fields
+
 
 /**
  *
@@ -104,6 +110,17 @@ public class AccountDetail extends javax.swing.JFrame {
         createDateBox.setEditable(false);
 
         jButton1.setText("Show Transactions");
+        //opens transactionsummary GUI
+        jButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                AccountTransactionDTO getter = new AccountTransactionDTO();
+                ArrayList transactionList = new ArrayList();
+                    transactionList = getter.transactionListByID(accountSelected.getAccountNum());
+               int x = 1;
+
+            }
+        });
 
         jButton2.setText("Cancel");
         jButton2.addActionListener(new ActionListener() {

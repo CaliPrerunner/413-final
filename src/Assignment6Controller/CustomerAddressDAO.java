@@ -99,6 +99,7 @@ public class CustomerAddressDAO implements DAOInterface<CustomerAddress> {
         pStatement.setString(4, addr.getState());
         pStatement.setInt(5, addr.getZip());
         pStatement.setInt(6, addr.getID());
+        pStatement.setInt(6, addr.getID());
         result = pStatement.executeUpdate();
         
         return result;
