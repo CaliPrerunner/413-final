@@ -153,5 +153,19 @@ public class BankAccountDAO implements DAOInterface<BankAccount>{
 
         return updatedAct;
     }
+
+
+    public int updateAccType(String a, BankAccount act) throws SQLException {
+
+        int result = -1;
+        pStatement = connection.prepareStatement(BankAccountDataConnection.getAccUpdate());
+        pStatement.setString(1, a);
+        pStatement.setInt(2, act.getAccountNum());
+        result = pStatement.executeUpdate();
+
+
+
+        return result;
+    }
     
 }

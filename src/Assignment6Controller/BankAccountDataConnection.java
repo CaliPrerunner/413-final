@@ -15,7 +15,11 @@ public class BankAccountDataConnection extends DataConnection {
     private static final String SELECT_SQL_BYID = "SELECT * FROM bankaccount WHERE acct_num = ?";
     private static final String UPDATE_SQL = "UPDATE bankaccount SET cust_num = ?, balance = ?, create_date = ?, acct_type = ? WHERE acct_num = ?";
     private static final String DELETE_SQL = "DELETE FROM bankaccount WHERE acct_num = ?";
+    private static final String UPDATE_ACCTPE = "UPDATE bankaccount SET acct_type = ? WHERE acct_num = ?";
 
+public static String getAccUpdate(){
+    return UPDATE_ACCTPE;
+}
 
     public static String getInsert() {
         

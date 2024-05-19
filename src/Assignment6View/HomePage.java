@@ -41,6 +41,7 @@ public class HomePage extends JFrame implements ActionListener {
         jbSearch.setBounds(100, 200, 200,40);
         jbSearch.addActionListener(this);
         theLabel.add(jbSearch);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         //opens the CutsomerList GUI and displays all customers
         showAllCust = new JButton("Show All Customers");

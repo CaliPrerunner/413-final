@@ -60,8 +60,11 @@ public class CustomerDetail extends javax.swing.JFrame {
         CustDetailLabel.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         CustDetailLabel.setText("Customer Detail");
 
+        //the core data that cannot be change by the customer is not changeable by the setEditable(false); method
         FirstNameBox.setText(selectedCust.getFirstName());
+        FirstNameBox.setEditable(false);
         LastNameBox.setText(selectedCust.getLastName());
+        LastNameBox.setEditable(false);
         emailBox.setText(selectedCust.getEmail());
         saveButt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -71,6 +74,7 @@ public class CustomerDetail extends javax.swing.JFrame {
         phoneBox.setText(selectedCust.getPhone());
 
         addressbox.setText(selectedCust.getAddress().toString());
+        addressbox.setEditable(false);
 
         jList1.setModel(new javax.swing.AbstractListModel<>() {
              ArrayList t = selectedCust.getAccounts();
@@ -113,6 +117,14 @@ public class CustomerDetail extends javax.swing.JFrame {
         });
 
         cancel.setText("Cancel");
+        //resets the data in the text feild boxes
+        cancel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                emailBox.setText(selectedCust.getEmail());
+                phoneBox.setText(selectedCust.getPhone());
+            }
+        });
 
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

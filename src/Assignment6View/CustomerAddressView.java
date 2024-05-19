@@ -69,6 +69,7 @@ public class CustomerAddressView extends javax.swing.JFrame {
         zipLabel.setText("Zip:");
 
         custNameBox.setText(getcustName());
+        custNameBox.setEditable(false);
 
         stNumBox.setText(Integer.toString(addy.getStreetNum()));
 
@@ -84,28 +85,40 @@ public class CustomerAddressView extends javax.swing.JFrame {
         jButton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+                boolean updated = false;
+
                 if(!addy.getCity().equals(cityBox.getText())) {
                     addy.setCity(cityBox.getText());
-                }else if(!addy.getState().equals(stateBox.getText())) {
+                    updated=true;
+                    System.out.println("city");
+                }
+                if(!addy.getState().equals(stateBox.getText())) {
                     addy.setState(stateBox.getText());
+                    updated=true;
                 }
-                else if(!addy.getStreetName().equals(stNameBox.getText())) {
+                if(!addy.getStreetName().equals(stNameBox.getText())) {
                     addy.setStreet(stNameBox.getText());
+                    updated=true;
+                    System.out.println("street");
                 }
-                else if(addy.getStreetNum() != Integer.parseInt(stNumBox.getText())) {
+                if(addy.getStreetNum() != Integer.parseInt(stNumBox.getText())) {
                     addy.setStreetNum(Integer.parseInt(stNumBox.getText()));
+                    updated=true;
                 }
-                else if(addy.getZip() != Integer.parseInt(zipBox.getText())) {
+                if(addy.getZip() != Integer.parseInt(zipBox.getText())) {
                     addy.setZip(Integer.parseInt(zipBox.getText()));
-                } else{
-                    JOptionPane.showMessageDialog(null, "None of the attributes have been updated");
+                    updated=true;
                 }
 
-                CustomerAddressDTO setter = new CustomerAddressDTO();
+                if(updated == true) {
+                    CustomerAddressDTO setter = new CustomerAddressDTO();
+                    setter.performUpdate(addy);
+                    JOptionPane.showMessageDialog(null, "Update successful");
+                }else{
+                    JOptionPane.showMessageDialog(null, "None of the attributes have been updated");
 
-
-                JOptionPane.showMessageDialog(null, "Update sucesful");
-
+                }
             }
         });
 
@@ -114,6 +127,7 @@ public class CustomerAddressView extends javax.swing.JFrame {
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
+
             }
         });
 
@@ -193,8 +207,15 @@ public class CustomerAddressView extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //refreshes the data in the text box's
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        custNameBox.setText(getcustName());
+        stNumBox.setText(Integer.toString(addy.getStreetNum()));
+        stNameBox.setText(addy.getStreetName());
+        cityBox.setText(addy.getCity());
+        stateBox.setText(addy.getState());
+        zipBox.setText(Integer.toString(addy.getZip()));
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -263,8 +284,7 @@ public class CustomerAddressView extends javax.swing.JFrame {
     // TODO: NEXT THING TO DO
 
 
-    //NEED TO ALLOW FOR EDIT OF ADDRESS OBJECTS
-    //THEN
+
     //work on opening and displaying the transactios objects from the transactions summary page
     //THEN
     //LOOK at what the professor said about what you did

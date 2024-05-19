@@ -24,7 +24,7 @@ public class CustomerDataConnection extends DataConnection {
     private static final String UPDATE_SQL = "UPDATE bankcustomer SET email = ?, phone = ? WHERE id = ?";
     private static final String DELETE_SQL = "DELETE FROM bankcustomer WHERE id = ?";
     private static final String SELECT_ADMIN = "SELECT * FROM admin WHERE userid = ?";
- 
+
     public CustomerDataConnection()  { } 
     
     public static String getInsert() {

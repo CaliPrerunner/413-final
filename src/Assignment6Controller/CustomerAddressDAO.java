@@ -92,12 +92,13 @@ public class CustomerAddressDAO implements DAOInterface<CustomerAddress> {
         
         int result = -1;
         
-        pStatement = connection.prepareStatement(CustomerDataConnection.getUpdate());
+        pStatement = connection.prepareStatement(AddressDataConnection.getUpdate());
         pStatement.setInt(1, addr.getStreetNum());
         pStatement.setString(2, addr.getStreetName());
         pStatement.setString(3, addr.getCity());
         pStatement.setString(4, addr.getState());
         pStatement.setInt(5, addr.getZip());
+        pStatement.setInt(6, addr.getID());
         result = pStatement.executeUpdate();
         
         return result;

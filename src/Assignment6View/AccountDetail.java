@@ -8,9 +8,15 @@
 //so that these vales can be displayed in the GUI
 package Assignment6View;
 
+import Assignment6Controller.BankAccountDTO;
 import Assignment6Controller.CustomerDTO;
 import Assignment6Model.BankAccount;
 import Assignment6Model.BankCustomer;
+import Assignment6Model.SavingsAccount;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  *
@@ -45,6 +51,34 @@ public class AccountDetail extends javax.swing.JFrame {
         createDateBox = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        save = new javax.swing.JButton();
+
+        save.setText("Save");
+        //save button's action will save the data to the database
+        save.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //will be her to see if data has been changed
+                boolean t =false;
+                //checks to see if the data in the text box has been changed
+                if( !accTypeBox.getText().equals(accountSelected.getAccString())){
+                    t=true;
+                    BankAccountDTO setter = new BankAccountDTO();
+                    //data has been changed and going to check to see if it is in the right format
+                    if(accTypeBox.getText().equalsIgnoreCase("checking")){
+                        setter.updateAccType("CH",accountSelected);
+                    }else if(accTypeBox.getText().equalsIgnoreCase("savings")){
+                        setter.updateAccType("SV",accountSelected);
+                    }
+                    else{
+                   JOptionPane.showMessageDialog(null, "Error, please type 'checking' or 'savings' with no spaces to update");
+                    }
+                }
+                if(t){
+                    JOptionPane.showMessageDialog(null, "Customer update was Successful");
+                }
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -54,6 +88,7 @@ public class AccountDetail extends javax.swing.JFrame {
         jLabel2.setText("Customer:");
 
         custNameBox.setText(getcustName());
+        custNameBox.setEditable(false);
 
         jLabel3.setText("Account Type:");
 
@@ -62,14 +97,21 @@ public class AccountDetail extends javax.swing.JFrame {
         jLabel4.setText("Balance:");
 
         ballanceBox.setText( String.valueOf(accountSelected.getBalance()));
+        ballanceBox.setEditable(false);
 
         jLabel5.setText("Create Date:");
-
         createDateBox.setText(accountSelected.getCreateDate().toString());
+        createDateBox.setEditable(false);
 
         jButton1.setText("Show Transactions");
 
         jButton2.setText("Cancel");
+        jButton2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                accTypeBox.setText(accountSelected.getAccType());
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -80,6 +122,7 @@ public class AccountDetail extends javax.swing.JFrame {
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton2)
+                    .addComponent(save)
                 .addGap(68, 68, 68))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -135,7 +178,9 @@ public class AccountDetail extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jButton2)
+                        .addComponent(save))
+
                 .addContainerGap())
         );
 
@@ -189,6 +234,7 @@ public class AccountDetail extends javax.swing.JFrame {
     private javax.swing.JTextField accTypeBox;
     private javax.swing.JTextField ballanceBox;
     private javax.swing.JTextField createDateBox;
+    private javax.swing.JButton save;
 
     //personal
     public static BankAccount accountSelected;

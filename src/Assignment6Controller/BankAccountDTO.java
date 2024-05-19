@@ -58,6 +58,17 @@ public class BankAccountDTO {
         return AccList;
     }
 
+    public static void updateAccType(String a, BankAccount acc){
+
+      try{
+          cd.updateAccType(a, acc);
+      }catch (SQLException se){
+          System.out.println(se.getMessage());
+      }
+
+
+    }
+
 
 
 
