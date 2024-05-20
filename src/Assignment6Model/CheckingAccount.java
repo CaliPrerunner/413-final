@@ -15,7 +15,7 @@ public class CheckingAccount extends BankAccount{
         super();
         this.setAccType("Checking");
     }
-    public CheckingAccount(int bal) {
+    public CheckingAccount(float bal) {
         super();
         balance = bal;
         this.setAccType("Checking");

@@ -18,7 +18,7 @@ import java.sql.*;
  */
 public class HomePage extends JFrame implements ActionListener {
     
-    JButton jbSearch, jbAdd, jbRemove, jbUpdate, showAllCust;
+    JButton jbSearch, jbAdd, jbRemove, jbUpdate, showAllCust, TransactionSearch;
     
     HomePage() {
     
@@ -39,7 +39,12 @@ public class HomePage extends JFrame implements ActionListener {
         
         jbSearch = new JButton("Search Customer(s)");
         jbSearch.setBounds(100, 200, 200,40);
-        jbSearch.addActionListener(this);
+        jbSearch.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new CustomerSearch().setVisible(true);
+            }
+        });
         theLabel.add(jbSearch);
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -61,6 +66,16 @@ public class HomePage extends JFrame implements ActionListener {
         }
        );
         theLabel.add(showAllCust);
+        TransactionSearch = new JButton("Transaction Search");
+        TransactionSearch.setBounds(100, 350, 200, 40);
+        TransactionSearch.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                    new TransactionSummarySearch().setVisible(true);
+            }
+
+        });
+        theLabel.add(TransactionSearch);
         
         jbAdd = new JButton("Add New Customer");
         jbAdd.setBounds(100, 250, 200,40);

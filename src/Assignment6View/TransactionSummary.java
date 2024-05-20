@@ -6,7 +6,10 @@ package Assignment6View;
 
 import Assignment6Controller.CustomerDTO;
 import Assignment6Model.BankAccount;
+import Assignment6Model.BankAccountTransaction;
 import Assignment6Model.BankCustomer;
+
+import java.util.ArrayList;
 
 /**
  *
@@ -45,9 +48,9 @@ public class TransactionSummary extends javax.swing.JFrame {
         accIDLabel.setText("Accout ID:");
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+            ArrayList t = transactionList;
+            public int getSize() { return t.size(); }
+            public String getElementAt(int i) { return t.get(i).toString(); }
         });
         jScrollPane1.setViewportView(jList1);
 
@@ -164,21 +167,18 @@ public class TransactionSummary extends javax.swing.JFrame {
 
     //personal
     public static BankAccount accountSelected;
+    public static ArrayList<BankAccountTransaction> transactionList;
     public static void setaccountSelected(BankAccount a){
         accountSelected = a;
+    }
+    public static void setTranList(ArrayList a){
+        transactionList = a;
     }
     public String getcustName(){
         CustomerDTO t = new CustomerDTO();
         BankCustomer tt = t.customerByID(accountSelected.getCustID());
         return tt.getFirstName() + " " + tt.getLastName();
     }
-
-    //gets the anme
-//    public String getcustName(){
-//        CustomerDTO t = new CustomerDTO();
-//        //BankCustomer tt = t.customerByID(accountSelected.getCustID());
-//        return tt.getFirstName() + " " + tt.getLastName();
-//    }
 
     // End of variables declaration//GEN-END:variables
 }

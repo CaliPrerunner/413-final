@@ -117,7 +117,9 @@ public class AccountDetail extends javax.swing.JFrame {
                 AccountTransactionDTO getter = new AccountTransactionDTO();
                 ArrayList transactionList = new ArrayList();
                     transactionList = getter.transactionListByID(accountSelected.getAccountNum());
-               int x = 1;
+                TransactionSummary.setaccountSelected(accountSelected);
+              TransactionSummary.setTranList(transactionList);
+             new TransactionSummary().setVisible(true);
 
             }
         });

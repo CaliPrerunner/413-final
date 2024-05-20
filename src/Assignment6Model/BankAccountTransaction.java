@@ -103,13 +103,10 @@ public class BankAccountTransaction implements TransactionInterface {
         String str = "[ ";
         String acctString = null;
         
-        str += "Transaction #: " + (this.id() + "\nTranaction Date: " + this.createDate.toString() + " TransactionAmount: " + this.getAmount());
-        if(this.getSourceAccount() != null)            
-            acctString += "Source Account: " + this.getSourceAccount().toString();
-        else if (this.getSourceAccount() != null)            
-            acctString += "Target Account: " + this.getSourceAccount().toString();
+        str += "Transaction #: " + (this.id() + "\nTranaction Date: " + this.createDate.toString() + " Transaction Amount: " + this.getAmount()
+        +" Transaction Type: " + this.getType() + " Summary: " + this.getDescription());
 
-        return str += acctString + " ]";
+        return str += " ]";
     }
 
     public void execute() {

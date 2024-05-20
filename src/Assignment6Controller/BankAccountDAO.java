@@ -140,15 +140,26 @@ public class BankAccountDAO implements DAOInterface<BankAccount>{
         result = pStatement.executeQuery();
 
         BankAccount updatedAct = null;
-        if (result.next()) {
+        while (result.next()) {
             if(result.getString("acct_type").equalsIgnoreCase(checking))
-                updatedAct = new CheckingAccount( result.getInt("id"));
-            else
-                updatedAct = new SavingsAccount( result.getInt("id"));
+            {updatedAct = new CheckingAccount( result.getInt("acct_num"));}
+            else {
+                updatedAct = new SavingsAccount(result.getInt("acct_num"));
+            }
+            DateTimeFormatter format = DateTimeFormatter.ofPattern("d-M-yy");
 
             updatedAct.setBalance(result.getFloat("balance"));
-            LocalDate ld = createLocalDate(result.getString("create_date"));
+            LocalDate ld = LocalDate.parse(result.getString("create_date"), format);
             updatedAct.setCreateDate(ld);
+            updatedAct.setAccountNum(result.getInt("acct_num"));
+            updatedAct.setCustID(result.getInt("cust_id"));
+            ld = LocalDate.parse(result.getString("last_update_date"), format);
+            updatedAct.setLastUpDate(ld);
+            updatedAct.setOdLimit(result.getInt("od_limit"));
+            updatedAct.setIntRate(result.getFloat("int_rate"));
+
+            AccountTransactionDAO tr = new AccountTransactionDAO();
+            updatedAct.setTransactions(tr.getTransList(result.getInt("acct_num")));
         }
 
         return updatedAct;

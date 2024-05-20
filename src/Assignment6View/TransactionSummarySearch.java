@@ -1,5 +1,16 @@
 package Assignment6View;
 
+import Assignment6Controller.AccountTransactionDTO;
+import Assignment6Controller.BankAccountDTO;
+import Assignment6Controller.CustomerDTO;
+import Assignment6Model.BankAccount;
+import Assignment6Model.BankCustomer;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
 public class TransactionSummarySearch extends javax.swing.JFrame{
 
         /**
@@ -22,32 +33,64 @@ public class TransactionSummarySearch extends javax.swing.JFrame{
             jScrollPane1 = new javax.swing.JScrollPane();
             jList1 = new javax.swing.JList<>();
             jLabel2 = new javax.swing.JLabel();
-            jTextField1 = new javax.swing.JTextField();
+            accIDBox = new javax.swing.JTextField();
             jLabel3 = new javax.swing.JLabel();
-            jTextField2 = new javax.swing.JTextField();
+            custNameBox = new javax.swing.JTextField();
             jButton1 = new javax.swing.JButton();
+            search = new javax.swing.JButton();
             jLabel4 = new javax.swing.JLabel();
+            transactionList = new ArrayList();
 
             setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
             jLabel1.setText("Accout ID:");
 
             jList1.setModel(new javax.swing.AbstractListModel<String>() {
-                String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-                public int getSize() { return strings.length; }
-                public String getElementAt(int i) { return strings[i]; }
+                public int getSize() { return transactionList.size(); }
+                public String getElementAt(int i) { return transactionList.get(i).toString(); }
             });
             jScrollPane1.setViewportView(jList1);
 
             jLabel2.setText("Transactions:");
 
-            jTextField1.setText("acctID");
+            accIDBox.setText("acctID");
+
+
+            search.setText("Search");
+            search.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    accountSelected = null;
+                    BankAccountDTO getter = new BankAccountDTO();
+                   accountSelected= getter.BankAccountByID(Integer.parseInt(accIDBox.getText()));
+                    if(accountSelected ==null){
+                        JOptionPane.showMessageDialog(null, "Error, no transactions found with that account ID");
+                    }else{
+                        //searches for customer name via customerDTO and returns the name
+                        custNameBox.setText(getcustName());
+                        AccountTransactionDTO tgetter = new AccountTransactionDTO();
+                        transactionList = tgetter.transactionListByID(accountSelected.getAccountNum());
+                        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+                            public int getSize() { return transactionList.size(); }
+                            public String getElementAt(int i) { return transactionList.get(i).toString(); }
+                        });
+                    }
+                }
+            });
 
             jLabel3.setText("Customer Name:");
 
-            jTextField2.setText("CustName");
+            custNameBox.setText("CustName");
+            custNameBox.setEditable(false);
 
             jButton1.setText("Done");
+            //when user presses done it will hide the window
+            jButton1.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    setVisible(false);
+                }
+            });
 
             jLabel4.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
             jLabel4.setText("Transaction Summary");
@@ -69,12 +112,14 @@ public class TransactionSummarySearch extends javax.swing.JFrame{
                                                                             .addGroup(layout.createSequentialGroup()
                                                                                     .addComponent(jLabel1)
                                                                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                    .addComponent(accIDBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                                                     .addGap(30, 30, 30)
                                                                                     .addComponent(jLabel3)))
                                                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                                                    .addComponent(custNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                             .addGroup(layout.createSequentialGroup()
+                                                    .addGap(64, 64, 64)
+                                                    .addComponent(search)
                                                     .addGap(64, 64, 64)
                                                     .addComponent(jButton1)))
                                     .addContainerGap(31, Short.MAX_VALUE))
@@ -87,16 +132,23 @@ public class TransactionSummarySearch extends javax.swing.JFrame{
                                     .addGap(18, 18, 18)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                             .addComponent(jLabel1)
-                                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(accIDBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jLabel3)
-                                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(custNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGap(31, 31, 31)
                                     .addComponent(jLabel2)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jButton1)
-                                    .addContainerGap(16, Short.MAX_VALUE))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING) // Wrap the buttons in a parallel horizontal group
+                                            .addGroup(layout.createSequentialGroup()
+                                                    .addGap(18, 18, 18)
+                                                    .addComponent(jButton1))
+                                            .addGroup(layout.createSequentialGroup()
+                                                    .addGap(18, 18, 18)
+                                                    .addComponent(search)))
+                                    .addContainerGap(16, Short.MAX_VALUE)
+
+                            )
             );
 
             pack();
@@ -145,15 +197,20 @@ public class TransactionSummarySearch extends javax.swing.JFrame{
         private javax.swing.JLabel jLabel4;
         private javax.swing.JList<String> jList1;
         private javax.swing.JScrollPane jScrollPane1;
-        private javax.swing.JTextField jTextField1;
-        private javax.swing.JTextField jTextField2;
+        private javax.swing.JTextField accIDBox;
+        private javax.swing.JTextField custNameBox;
+    private javax.swing.JButton search;
+    public static BankAccount accountSelected;
+    public static ArrayList transactionList;
 
-        //gets the anme
-//    public String getcustName(){
-//        CustomerDTO t = new CustomerDTO();
-//        //BankCustomer tt = t.customerByID(accountSelected.getCustID());
-//        return tt.getFirstName() + " " + tt.getLastName();
-//    }
+
+
+    public String getcustName(){
+        CustomerDTO t = new CustomerDTO();
+        BankCustomer tt = t.customerByID(accountSelected.getCustID());
+        return tt.getFirstName() + " " + tt.getLastName();
+    }
+
 
         // End of variables declaration//GEN-END:variables
 

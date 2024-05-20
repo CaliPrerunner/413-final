@@ -76,7 +76,7 @@ public class AccountTransactionDAO implements DAOInterface<BankAccountTransactio
     }
     public ArrayList getList(int acctID) throws SQLException {
 
-        pStatement = connection.prepareStatement(BankAccountDataConnection.getSelect());
+        pStatement = connection.prepareStatement(TransactionDataConnection.getSelect());
         pStatement.setInt(1,acctID);
         result = pStatement.executeQuery();
         BankAccountTransaction at = null;
@@ -84,7 +84,7 @@ public class AccountTransactionDAO implements DAOInterface<BankAccountTransactio
         while (result.next()) {
             at = new BankAccountTransaction();
             DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yy");
-            at.setCreateDate(LocalDate.parse(result.getTimestamp("create_date"),format));
+            at.setCreateDate(result.getTimestamp("create_date"));
             at.setType(result.getString("tran_type"));
             at.setAmount(result.getDouble("amount"));
             at.setDescription(result.getString("summary"));
