@@ -6,10 +6,12 @@ package Assignment6View;
 
 import Assignment6Controller.BankAccountDTO;
 import Assignment6Controller.CustomerDTO;
+import Assignment6Model.BankAccount;
 import Assignment6Model.BankCustomer;
-import Assignment6Model.CustomerAddress;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -42,7 +44,7 @@ public class CustomerDetail extends javax.swing.JFrame {
         emailBox = new javax.swing.JTextField();
         phoneBox = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        bankAccList = new javax.swing.JList<>();
         firstNameLabel = new javax.swing.JLabel();
         LastNameLabel = new javax.swing.JLabel();
         emailLabel = new javax.swing.JLabel();
@@ -76,12 +78,12 @@ public class CustomerDetail extends javax.swing.JFrame {
         addressbox.setText(selectedCust.getAddress().toString());
         addressbox.setEditable(false);
 
-        jList1.setModel(new javax.swing.AbstractListModel<>() {
+        bankAccList.setModel(new javax.swing.AbstractListModel<>() {
              ArrayList t = selectedCust.getAccounts();
             public int getSize() { return t.size(); }
             public String getElementAt(int i) { return t.get(i).toString(); }
         });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(bankAccList);
 
         firstNameLabel.setText("First Name:");
 
@@ -98,7 +100,7 @@ public class CustomerDetail extends javax.swing.JFrame {
         addressLabel.setText("Address: ");
 
         updateAddress.setText("Update Address");
-        saveButt.setText("Save Customer Details");
+        saveButt.setText("Update Customer Details");
 
         updateAddress.addActionListener(new ActionListener() {
             @Override
@@ -126,6 +128,17 @@ public class CustomerDetail extends javax.swing.JFrame {
             }
         });
 
+        //gets the index of the bank account selected in the JList object
+        //allows the user to select a cusomter from the list and open it
+        bankAccList.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if(!e.getValueIsAdjusting()){
+                    selectedAccIndex = bankAccList.getSelectedIndex();
+                }
+            }
+        });
+
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -149,24 +162,27 @@ public class CustomerDetail extends javax.swing.JFrame {
                                     .addComponent(firstNameLabel)
                                         .addComponent(addressLabel)
                                     .addComponent(emailLabel))
-                                    .addComponent(addressbox)
+
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(FirstNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(emailBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(emailBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(addressbox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(phoneLabel)
-                                        .addGap(38, 38, 38)
-                                        .addGap(38, 38, 38)
+                                        .addGap(18, 18, 18)
+
                                         .addComponent(phoneBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(LastNameLabel)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(LastNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(26, 26, 26)))))
-                .addGap(30, 30, 30))
+                                //.addGap(26, 26, 26)
+                            ))))
+                .addGap(30, 30, 30)
+            )
             .addGroup(layout.createSequentialGroup()
                 .addGap(62, 62, 62)
                 .addComponent(actDetail)
@@ -231,9 +247,9 @@ public class CustomerDetail extends javax.swing.JFrame {
     private void actDetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_actDetailActionPerformed
         // TODO add your handling code here:
         BankAccountDTO getter = new BankAccountDTO();
-        ArrayList t= new ArrayList();
-        AccountList.setBankAccountList(getter.BankAccountByCustID(selectedCust.getCustomerID()));
-        new AccountList().setVisible(true);
+        ArrayList b = getter.BankAccountByCustID(selectedCust.getCustomerID());
+        AccountDetail.setaccountSelected((BankAccount) (b.get(selectedAccIndex)));
+        new AccountDetail().setVisible(true);
     }//GEN-LAST:event_actDetailActionPerformed
 
     //action when user presses enter into email box
@@ -306,7 +322,7 @@ public class CustomerDetail extends javax.swing.JFrame {
     private javax.swing.JLabel emailLabel;
     private javax.swing.JLabel phoneLabel;
     private javax.swing.JLabel accountLabel;
-    private javax.swing.JList<String> jList1;
+    private javax.swing.JList<String> bankAccList;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField FirstNameBox;
     private javax.swing.JTextField LastNameBox;
@@ -320,6 +336,8 @@ public class CustomerDetail extends javax.swing.JFrame {
     public static ArrayList transList;
     public javax.swing.JButton updateAddress;
     public javax.swing.JButton saveButt;
+    public static int selectedAccIndex;
+
 
     // End of variables declaration//GEN-END:variables
 }

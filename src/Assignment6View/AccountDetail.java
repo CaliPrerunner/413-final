@@ -13,15 +13,13 @@ import Assignment6Controller.BankAccountDTO;
 import Assignment6Controller.CustomerDTO;
 import Assignment6Model.BankAccount;
 import Assignment6Model.BankCustomer;
-import Assignment6Model.SavingsAccount;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-// TODO:
-// add intrest rate and over draft and last update fields
+
 
 
 /**
@@ -49,15 +47,19 @@ public class AccountDetail extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         custNameBox = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
+        accountTypeLabel = new javax.swing.JLabel();
         accTypeBox = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
+        balanceLabel = new javax.swing.JLabel();
         ballanceBox = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         createDateBox = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         save = new javax.swing.JButton();
+        interestRateLabel = new javax.swing.JLabel();
+        OverDraftLabel = new javax.swing.JLabel();
+        OverDraftBox = new javax.swing.JTextField();
+        interestRateBox = new javax.swing.JTextField();
 
         save.setText("Save");
         //save button's action will save the data to the database
@@ -96,11 +98,11 @@ public class AccountDetail extends javax.swing.JFrame {
         custNameBox.setText(getcustName());
         custNameBox.setEditable(false);
 
-        jLabel3.setText("Account Type:");
+        accountTypeLabel.setText("Account Type:");
 
         accTypeBox.setText(accountSelected.getAccType());
 
-        jLabel4.setText("Balance:");
+        balanceLabel.setText("Balance:");
 
         ballanceBox.setText( String.valueOf(accountSelected.getBalance()));
         ballanceBox.setEditable(false);
@@ -131,6 +133,16 @@ public class AccountDetail extends javax.swing.JFrame {
                 accTypeBox.setText(accountSelected.getAccType());
             }
         });
+        OverDraftLabel.setText("Over Draft: ");
+        OverDraftBox.setText(accountSelected.getOverD() + "");
+        OverDraftBox.setEditable(false);
+        interestRateLabel.setText("Interest Rate: ");
+        interestRateBox.setText(accountSelected.getIntRate() + " %");
+        interestRateBox.setEditable(false);
+
+
+
+
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -154,8 +166,10 @@ public class AccountDetail extends javax.swing.JFrame {
                                     .addGap(60, 60, 60))
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel3)
-                                        .addComponent(jLabel4))
+                                        .addComponent(accountTypeLabel)
+                                        .addComponent(balanceLabel)
+                                            .addComponent(OverDraftLabel)
+                                            .addComponent(interestRateLabel))
                                     .addGap(40, 40, 40)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel5)
@@ -164,6 +178,8 @@ public class AccountDetail extends javax.swing.JFrame {
                             .addComponent(accTypeBox)
                             .addComponent(createDateBox)
                             .addComponent(ballanceBox)
+                                .addComponent(OverDraftBox)
+                                .addComponent(interestRateBox)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(custNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))))
@@ -188,13 +204,25 @@ public class AccountDetail extends javax.swing.JFrame {
                     .addComponent(custNameBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
+                    .addComponent(accountTypeLabel)
                     .addComponent(accTypeBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(ballanceBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(balanceLabel)
+                    .addComponent(ballanceBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                )
+                    .addGap(31, 31, 31)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(OverDraftLabel)
+                            .addComponent(OverDraftBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    )
+                    .addGap(31, 31, 31)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(interestRateLabel)
+                            .addComponent(interestRateBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    )
                 .addGap(29, 29, 29)
+
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2)
@@ -246,9 +274,13 @@ public class AccountDetail extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel accountTypeLabel;
+    private javax.swing.JLabel balanceLabel;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel OverDraftLabel;
+    private javax.swing.JLabel interestRateLabel;
+    private javax.swing.JTextField OverDraftBox;
+    private javax.swing.JTextField interestRateBox;
     private javax.swing.JTextField custNameBox;
     private javax.swing.JTextField accTypeBox;
     private javax.swing.JTextField ballanceBox;

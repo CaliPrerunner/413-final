@@ -9,6 +9,8 @@ import Assignment6Model.BankAccount;
 import Assignment6Model.BankAccountTransaction;
 import Assignment6Model.BankCustomer;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 /**
@@ -65,6 +67,12 @@ public class TransactionSummary extends javax.swing.JFrame {
         customerNameBox.setEditable(false);
 
         jButton1.setText("Done");
+        jButton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         jLabel4.setText("Transaction Summary");

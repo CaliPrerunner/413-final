@@ -98,6 +98,12 @@ public abstract class BankAccount implements Comparable<BankAccount> {
     public double getBalance(){
         return balance;
     }
+    public double getIntRate(){
+        return intRate;
+    }
+    public int getOverD(){
+        return odLimit;
+    }
     public ArrayList getTransactions(){return (ArrayList)transactions;}
 
     public void deposit(double d){
